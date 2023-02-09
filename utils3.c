@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:03:32 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/02 13:23:43 by abin-saa         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:36:38 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	my_mlx_pixel_put1(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	my_mlx_pixel_put_alpha(t_data *data, int x, int y, int color)
-{
-	char	*dst;
+// void	my_mlx_pixel_put_alpha(t_data *data, int x, int y, int color)
+// {
+// 	char	*dst;
 
-	dst = data->addr_alpha + (y * data->line_length
-			+ x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
+// 	dst = data->addr_alpha + (y * data->line_length
+// 			+ x * (data->bits_per_pixel / 8));
+// 	*(unsigned int *)dst = color;
+// }
 
 void	my_mlx_pixel_put(t_data *game, int x, int y, int color)
 {

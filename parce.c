@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parce.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:57:12 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/04 09:23:48 by abin-saa         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:35:30 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_close_map(char **map)
 int	cheak_char(char c)
 {
 	if (c != '1' && c != '0' && c != 'N' && c != 'S'
-		&& c != 'E' && c != 'W' && c != ' ' && c != 'C' && c != 'X')
+		&& c != 'E' && c != 'W' && c != ' ')
 		return (0);
 	return (1);
 }

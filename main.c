@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:30:56 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/04 08:53:53 by abin-saa         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:55:03 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int	main(int ac, char **av)
 	int		max_size;
 	int		with;
 
-	(void)ac;
+	if (ac != 2)
+		exit(1);
 	read_map(av[1], &img);
 	cheack_error(&img);
 	max_size = f_lline(&img);

@@ -26,9 +26,6 @@
 # define ROTSPEED 0.1
 # define WALKSPEED 0.185
 
-
-
-
 typedef struct f_color
 {
 	char	*f;
@@ -45,7 +42,7 @@ typedef struct c_color
 	int		b;
 }t_ccolor;
 
-typedef struct	s_data
+typedef	struct	s_data
 {
 	void				*img;
 	void				*img_minimap;
@@ -56,8 +53,6 @@ typedef struct	s_data
 	int					bpp[4];
 	int					ll[4];
 	int					en[4];
-				
-
 	char				*first_line;
 	char				*addr;
 	double				posX;
@@ -70,8 +65,6 @@ typedef struct	s_data
 	unsigned int		buffer[SCREENHEIGHT][SCREENWIDTH];
 	int					width[4];
 	int					height[4];
-
-
 	char				**data;
 	char				**map;
 	unsigned int		drawStart;
@@ -93,8 +86,6 @@ typedef struct	s_data
 	char				*NO;
 	t_ccolor			c_color;
 	t_fcolor			f_color;
-
-
 	unsigned long long	frame;
 	void				*gun1;
 	void				*gun2;
@@ -171,9 +162,6 @@ void	creat_imgs2(t_data *img);
 int		mouse(int x, int y, t_data *img);
 void	draw_player_helper(t_data *data, int i, int j, int skip);
 int		frame_counter(void *data);
-int		mouse_hook(int keycode, int x, int y, t_data *img);
-void	move_up(t_data *img, double nextp_x, double nextp_y, int skip);
-void	move_down(t_data *img, double nextp_x, double nextp_y, int skip);
 void	key_check_updown(int keycode, t_data *img);
 char	*read_first_line(int fd);
 char	*remove_empty_lines(char *line, int fd);
@@ -182,6 +170,9 @@ void	make_map(t_list *list, t_data *data);
 void	read_map(char *str, t_data *data);
 int		open_file(char *str);
 char	*read_meta_data(int fd, t_data *data);
+
+void	move_up(t_data *img, double nextp_x, double nextp_y, int skip);
 void	move_down(t_data *img, double nextp_x, double nextp_y, int skip);
+
 
 #endif

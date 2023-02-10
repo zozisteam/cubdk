@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:31:44 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:38:55 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:57:25 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,14 @@ int	get_t(int trgb)
 	return ((trgb >> 24) & 0xFF);
 }
 
-void raycast(t_data *img)
+void	raycast(t_data *img)
 {
-	int x = 0;
-	int mapX;
-	int mapY;
-	static long frame = 0;
+	int			x;
+	int			map_x;
+	int			map_y;
+	static long	frame = 0;
 
+	x = 0;
 	while (x < SCREENWIDTH)
 	{
 		// calculate ray position and direction
@@ -88,8 +89,8 @@ void raycast(t_data *img)
 		double rayDirX = img->dirX + +img->planeX * cameraX;
 		double rayDirY = img->dirY + img->planeY * cameraX;
 		// which box of the map we're in
-		mapX = (int)(img->posX);
-		mapY = (int)(img->posY);
+		map_x = (int)(img->posX);
+		map_y = (int)(img->posY);
 
 		// length of ray from current position to next x or y-side
 		double sideDistX;
@@ -110,22 +111,22 @@ void raycast(t_data *img)
 		if (rayDirX < 0)
 		{
 			stepX = -1;
-			sideDistX = (img->posX - mapX) * deltaDistX;
+			sideDistX = (img->posX - map_x) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - img->posX) * deltaDistX;
+			sideDistX = (map_x + 1.0 - img->posX) * deltaDistX;
 		}
 		if (rayDirY < 0)
 		{
 			stepY = -1;
-			sideDistY = (img->posY - mapY) * deltaDistY;
+			sideDistY = (img->posY - map_y) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - img->posY) * deltaDistY;
+			sideDistY = (map_y + 1.0 - img->posY) * deltaDistY;
 		}
 		// perform DDA
 		while (hit == 0)
@@ -134,20 +135,19 @@ void raycast(t_data *img)
 			if (sideDistX < sideDistY)
 			{
 				sideDistX += deltaDistX;
-				mapX += stepX;
+				map_x += stepX;
 				side = 0;
 			}
 			else
 			{
 				sideDistY += deltaDistY;
-				mapY += stepY;
+				map_y += stepY;
 				side = 1;
 			}
-
 			// Check if ray has hit a wall
-			if (ft_strlen(img->s[mapX]) > (size_t)mapY)
+			if (ft_strlen(img->s[map_x]) > (size_t)map_y)
 			{
-				if (img->s[mapX][mapY] == '1')
+				if (img->s[map_x][map_y] == '1')
 					hit = 1;
 			}
 		}
@@ -158,7 +158,6 @@ void raycast(t_data *img)
 			perpWallDist = (sideDistY - deltaDistY);
 		// Calculate height of line to draw on screen
 		int lineHeight = (int)(SCREENHEIGHT / perpWallDist);
-
 		// calculate lowest and highest pixel to fill in current stripe
 		img->drawStart = -lineHeight / 2 + SCREENHEIGHT / 2;
 		if (img->drawStart < 0)
@@ -168,13 +167,6 @@ void raycast(t_data *img)
 			img->drawEnd = SCREENHEIGHT - 1;
 		if (img->drawStart >= SCREENHEIGHT)
 			img->drawStart = 0;
-		// choose wall color
-		//  int color;
-		//  switch(img->s[mapX][mapY])
-		//  {
-		//  	case '1':  color = 0x00FF0000;  break; //red
-		//  	default: color = 0x00000000; break; //yellow
-		//  }
 		// calculate value of wallX
 		double wallX; // where exactly the wall was hit
 		if (side == 0)
@@ -182,7 +174,6 @@ void raycast(t_data *img)
 		else
 			wallX = img->posX + perpWallDist * rayDirX;
 		wallX -= floor((wallX));
-
 		// x coordinate on the texture
 		int texX = (int)(wallX * (double)(TEXWIDTH));
 		if (side == 0 && rayDirX > 0)
@@ -207,13 +198,11 @@ void raycast(t_data *img)
 				{
 					if (hit == 1)
 						color = (int)img->texture[0][(int)TEXHEIGHT * texY + texX] ;
-
 				}
 				else if (side == 0 && rayDirX < 0)
 				{
 					if (hit == 1)
 						color = (int)img->texture[1][(int)TEXHEIGHT * texY + texX];
-
 				}
 				else if (side == 1 && rayDirY > 0)
 				{
@@ -267,6 +256,5 @@ void raycast(t_data *img)
 	white_box(img, img->posx * size, img->posy * size, 0x00FF0000);
 	minimap(img);
 	mlx_put_image_to_window(img->mlx, img->win, img->gun1, 450, 510);
-
 	frame++;
 }

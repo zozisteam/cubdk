@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:57:28 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/09 19:12:06 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:51:47 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,10 @@ void	creat_imgs2(t_data *img)
 	int	i;
 
 	i = 400;
-	
 	img->gun1 = mlx_xpm_file_to_image(img->mlx,
 			"./img/gun4c.xpm", &i, &i);
 	img->gun2 = mlx_xpm_file_to_image(img->mlx,
 			"./img/gun4b.xpm", &i, &i);
-	
 }
 
 void	creat_imgs(t_data *img)
@@ -76,8 +74,8 @@ void	creat_imgs(t_data *img)
 
 int	mouse(int x, int y, t_data *img)
 {
-	(void)y;
 	mlx_mouse_hide();
+	(void)y;
 	if (x > SCREENWIDTH / 2)
 	{
 		key_check_rotate(124, img);

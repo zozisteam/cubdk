@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:10 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/09 19:10:05 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:53:30 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	key_check_rotate(int keycode, t_data *img)
 
 int	key_check(int keycode, t_data *img)
 {
-
 	key_check_updown(keycode, img);
 	key_check_rightleft(keycode, img);
 	key_check_rotate(keycode, img);

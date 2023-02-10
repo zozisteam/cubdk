@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:29:29 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/04 10:02:58 by abin-saa         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:52:02 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void	minimap(t_data *data)
 	double	p2y;
 
 	draw_map(data);
-
 	p2x = data->posx
 		- (cos(data->player_dir) * 1);
 	p2y = data->posy

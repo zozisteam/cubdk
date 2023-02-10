@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:30:56 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:41:16 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:45:24 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ int	main(int ac, char **av)
 	raycast(&img);
 	mlx_hook(img.win, 2, 0, key_check, &img);
 	mlx_hook(img.win, 6, 1L << 6, mouse, &img);
-	mlx_mouse_hook(img.win, mouse_hook, &img);
 	mlx_loop_hook(img.mlx, &frame_counter, &img);
 	mlx_loop(img.mlx);
 }

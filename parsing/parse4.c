@@ -6,13 +6,13 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:43:04 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:33:41 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/10 08:41:04 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	cheack_colo3(t_data *data, int *n, int *j)
+void	check_color3(t_data *data, int *n, int *j)
 {
 	int	i;
 	int	k;
@@ -69,9 +69,9 @@ int	fill_data(t_data *data)
 	i = 0;
 	while (data->data[i])
 	{
-		cheack_colore(data, &k, &i);
-		cheack_colo2(data, &k, &i);
-		cheack_colo3(data, &k, &i);
+		check_color(data, &k, &i);
+		check_color2(data, &k, &i);
+		check_color3(data, &k, &i);
 		i++;
 		k = 0;
 	}
@@ -102,7 +102,7 @@ void	fill_the_colore2(t_data *data)
 	ft_freearray((void **)tmp);
 }
 
-int	fill_the_colore(t_data *data)
+int	fill_color(t_data *data)
 {
 	int		i;
 	int		k;

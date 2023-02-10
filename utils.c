@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 07:50:23 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/02 10:02:20 by abin-saa         ###   ########.fr       */
+/*   Updated: 2023/02/10 08:38:55 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**ft_copyarr(char **arr)
 	char	**copy;
 	int		len;
 
-	len = ft_2dlen((void **)arr);
+	len = arr_2d_len((void **)arr);
 	copy = (char **)malloc(sizeof(char *) * (len + 1));
 	copy[len] = NULL;
 	while (len--)

@@ -6,30 +6,30 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 07:01:22 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:33:30 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/10 08:40:34 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	cheack_error(t_data *img)
+int	check_error(t_data *img)
 {
 	fill_data(img);
-	if (cheack(img->data) == 0)
+	if (check(img->data) == 0)
 		ft_error();
-	if (fill_the_colore(img) == 0)
+	if (fill_color(img) == 0)
 		ft_error();
 	if (check_color_range(img) == 0)
 		ft_error();
 	if (exist_image(img) == 0)
 		ft_error();
-	if (cheack_all_img(img) == 0)
+	if (chek_imgs(img) == 0)
 		ft_error();
 	if (invalid_map(img->map) == 0)
 		ft_error();
 	if (cheack_if_dirc(img->map) == 0)
 		ft_error();
-	if (cheack_zeros(img) == 0)
+	if (check_zeros(img) == 0)
 		ft_error();
 	if (check_close_map(img->map) == 0)
 		ft_error();
@@ -45,7 +45,7 @@ void	init(t_data	*img)
 
 	img->mlx = mlx_init();
 	max_size = f_lline(img);
-	with = ft_2dlen((void **)img->map);
+	with = arr_2d_len((void **)img->map);
 	size = 900 / (max_size + with);
 	skip = first_space(img->map);
 	img->img_minimap = mlx_new_image(img->mlx, size

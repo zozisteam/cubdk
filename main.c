@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:30:56 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/09 19:55:03 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/10 08:41:16 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		exit(1);
 	read_map(av[1], &img);
-	cheack_error(&img);
+	check_error(&img);
 	max_size = f_lline(&img);
-	with = ft_2dlen((void **)img.map);
+	with = arr_2d_len((void **)img.map);
 	init(&img);
 	img.size = 900 / (max_size + with);
 	img.frame = 0;
@@ -103,6 +103,6 @@ int	main(int ac, char **av)
 	mlx_hook(img.win, 2, 0, key_check, &img);
 	mlx_hook(img.win, 6, 1L << 6, mouse, &img);
 	mlx_mouse_hook(img.win, mouse_hook, &img);
-	mlx_loop_hook(img.mlx, &frame_conter, &img);
+	mlx_loop_hook(img.mlx, &frame_counter, &img);
 	mlx_loop(img.mlx);
 }

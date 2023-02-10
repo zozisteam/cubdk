@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:00:55 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/02 10:04:58 by abin-saa         ###   ########.fr       */
+/*   Updated: 2023/02/10 08:38:55 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_2dlen(void **arr)
+int	arr_2d_len(void **arr)
 {
 	long long	i;
 

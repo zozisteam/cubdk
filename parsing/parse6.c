@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:19:57 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:33:50 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/10 08:38:55 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**roted_array(char **arr)
 	i = 0;
 	j = 0;
 	k = 0;
-	new_arr = (char **)malloc(sizeof(char *) * (ft_2dlen((void **)arr) + 1));
+	new_arr = (char **)malloc(sizeof(char *) * (arr_2d_len((void **)arr) + 1));
 	while (arr[i])
 	{
 		new_arr[i] = (char *)malloc(sizeof(char) * (ft_strlen(arr[i]) + 1));
@@ -57,7 +57,7 @@ char	**ft_remove_new_line(char **arr)
 	i = 0;
 	j = 0;
 	k = 0;
-	new_arr = (char **)malloc(sizeof(char *) * (ft_2dlen((void **)arr) + 1));
+	new_arr = (char **)malloc(sizeof(char *) * (arr_2d_len((void **)arr) + 1));
 	while (arr[i])
 	{
 		new_arr[i] = (char *)malloc(sizeof(char) * (ft_strlen(arr[i]) + 1));

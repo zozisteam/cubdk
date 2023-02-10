@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utlils6.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:07:45 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/02 15:08:00 by abin-saa         ###   ########.fr       */
+/*   Updated: 2023/02/10 08:41:16 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	frame_conter(void *data)
+int	frame_counter(void *data)
 {
 	t_data	*img;
 

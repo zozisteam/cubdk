@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:31:44 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/09 19:05:24 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/10 08:38:55 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,7 +258,7 @@ void raycast(t_data *img)
 		x++;
 	}
 	int max_size = f_lline(img);
-	int with = ft_2dlen((void **)img->map);
+	int with = arr_2d_len((void **)img->map);
 
 	int skip = first_space(img->map);
 	int size = 900 / (max_size + with);

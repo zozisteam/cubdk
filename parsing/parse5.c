@@ -6,13 +6,13 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:47:03 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:33:46 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/10 08:40:56 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	cheack_colore(t_data *data, int *n, int *j)
+int	check_color(t_data *data, int *n, int *j)
 {
 	int	i;
 	int	k;
@@ -40,7 +40,7 @@ int	cheack_colore(t_data *data, int *n, int *j)
 	return (1);
 }
 
-void	cheack_colo2(t_data *data, int *n, int *j)
+void	check_color2(t_data *data, int *n, int *j)
 {
 	int	i;
 	int	k;
@@ -73,7 +73,7 @@ int	cheack_zero_helper(char **map, int *i, int *j)
 	if (map[n][m] == '0' || map[n][m] == 'W'
 				|| map[n][m] == 'S' || map[n][m] == 'E' || map[n][m] == 'N')
 	{
-		if (n > 0 && m > 0 && (n < ft_2dlen((void **)map) - 1)
+		if (n > 0 && m > 0 && (n < arr_2d_len((void **)map) - 1)
 			&& (m < (int)ft_strlen(map[n]) - 1))
 		{
 			if ((m > (int)ft_strlen(map[n - 1]) - 1
@@ -88,7 +88,7 @@ int	cheack_zero_helper(char **map, int *i, int *j)
 	return (1);
 }
 
-int	cheack_zeros(t_data *data)
+int	check_zeros(t_data *data)
 {
 	int		i;
 	int		j;

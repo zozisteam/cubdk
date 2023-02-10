@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 08:04:23 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:33:35 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/10 08:40:10 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_color_range(t_data *data)
 	return (1);
 }
 
-int	invaild_img(char *str)
+int	invalid_img(char *str)
 {
 	int	i;
 
@@ -42,18 +42,18 @@ int	invaild_img(char *str)
 
 int	exist_image(t_data *data)
 {
-	if (cheack_exist_img(data->EA) == 0)
+	if (check_img_exist(data->EA) == 0)
 		return (0);
-	if (cheack_exist_img(data->SO) == 0)
+	if (check_img_exist(data->SO) == 0)
 		return (0);
-	if (cheack_exist_img(data->WE) == 0)
+	if (check_img_exist(data->WE) == 0)
 		return (0);
-	if (cheack_exist_img(data->NO) == 0)
+	if (check_img_exist(data->NO) == 0)
 		return (0);
 	return (1);
 }
 
-int	cheack_exist_img(char *str)
+int	check_img_exist(char *str)
 {
 	int	fd;
 
@@ -64,11 +64,11 @@ int	cheack_exist_img(char *str)
 	return (1);
 }
 
-int	cheack(char **data)
+int	check(char **data)
 {
 	int	i;
 
-	i = ft_2dlen((void **)data);
+	i = arr_2d_len((void **)data);
 	if (i != 6)
 		return (0);
 	return (1);

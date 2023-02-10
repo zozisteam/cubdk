@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:57:12 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:33:25 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/10 08:40:41 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_close_map(char **map)
 	return (1);
 }
 
-int	cheak_char(char c)
+int	check_char(char c)
 {
 	if (c != '1' && c != '0' && c != 'N' && c != 'S'
 		&& c != 'E' && c != 'W' && c != ' ')
@@ -52,7 +52,7 @@ int	invalid_map(char **map)
 	{
 		while (map[i][j])
 		{
-			if (cheak_char(map[i][j]) == 0)
+			if (check_char(map[i][j]) == 0)
 				return (0);
 			j++;
 		}
@@ -69,15 +69,15 @@ int	invalid_map(char **map)
 	return (1);
 }
 
-int	cheack_all_img(t_data *data)
+int	chek_imgs(t_data *data)
 {
-	if (invaild_img(data->EA) == 0)
+	if (invalid_img(data->EA) == 0)
 		return (0);
-	if (invaild_img(data->SO) == 0)
+	if (invalid_img(data->SO) == 0)
 		return (0);
-	if (invaild_img(data->WE) == 0)
+	if (invalid_img(data->WE) == 0)
 		return (0);
-	if (invaild_img(data->NO) == 0)
+	if (invalid_img(data->NO) == 0)
 		return (0);
 	return (1);
 }

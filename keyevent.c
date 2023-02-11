@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyevent.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:12:16 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/04 09:50:49 by abin-saa         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:50:43 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	move_right(t_data *img, double nextp_x, double nextp_y, int skip)
 {
-	if (img->s[(int)(img->posX + img->planeX * WALKSPEED)][(int)(img->posY)]
-			&& img->s[(int)(img->posX + img->planeX * WALKSPEED)]
-			[(int)(img->posY)] != '1'
-				&& img->s[(int)(img->posX + img->planeX * WALKSPEED)]
-				[(int)(img->posY)] != 'C' )
-			img->posX += img->planeX * WALKSPEED;
-	if (img->s[(int)(img->posX)][(int)(img->posY + img->planeY * WALKSPEED)]
-			&& img->s[(int)(img->posX)]
-			[(int)(img->posY + img->planeY * WALKSPEED)] != '1'
-				&& img->s[(int)(img->posX)]
-				[(int)(img->posY + img->planeY * WALKSPEED)] != 'C')
-			img->posY += img->planeY * WALKSPEED;
+	if (img->s[(int)(img->pos_x + img->plane_x * WALKSPEED)][(int)(img->pos_y)]
+			&& img->s[(int)(img->pos_x + img->plane_x * WALKSPEED)]
+			[(int)(img->pos_y)] != '1'
+				&& img->s[(int)(img->pos_x + img->plane_x * WALKSPEED)]
+				[(int)(img->pos_y)] != 'C' )
+			img->pos_x += img->plane_x * WALKSPEED;
+	if (img->s[(int)(img->pos_x)][(int)(img->pos_y + img->plane_y * WALKSPEED)]
+			&& img->s[(int)(img->pos_x)]
+			[(int)(img->pos_y + img->plane_y * WALKSPEED)] != '1'
+				&& img->s[(int)(img->pos_x)]
+				[(int)(img->pos_y + img->plane_y * WALKSPEED)] != 'C')
+			img->pos_y += img->plane_y * WALKSPEED;
 		nextp_x = img->posx
 		- (cos(img->player_dir - (M_PI / 2)) * WALKSPEED / 1.5);
 		nextp_y = img->posy
@@ -43,24 +43,24 @@ void	move_right(t_data *img, double nextp_x, double nextp_y, int skip)
 
 void	move_left_helper(t_data *img)
 {
-	if (img->s[(int)(img->posX - img->planeX * WALKSPEED)]
-			[(int)(img->posY)]
-			&& img->s[(int)(img->posX - img->planeX * WALKSPEED)]
-			[(int)(img->posY)] != '1'
-			&& img->s[(int)(img->posX - img->planeX * WALKSPEED)]
-				[(int)(img->posY)] != 'C')
-			img->posX -= img->planeX * WALKSPEED;
+	if (img->s[(int)(img->pos_x - img->plane_x * WALKSPEED)]
+			[(int)(img->pos_y)]
+			&& img->s[(int)(img->pos_x - img->plane_x * WALKSPEED)]
+			[(int)(img->pos_y)] != '1'
+			&& img->s[(int)(img->pos_x - img->plane_x * WALKSPEED)]
+				[(int)(img->pos_y)] != 'C')
+			img->pos_x -= img->plane_x * WALKSPEED;
 }
 
 void	move_left(t_data *img, double nextp_x, double nextp_y, int skip)
 {
 	move_left_helper(img);
-	if (img->s[(int)(img->posX)][(int)(img->posY - img->planeY * WALKSPEED)]
-			&& img->s[(int)(img->posX)]
-				[(int)(img->posY - img->planeY * WALKSPEED)] != '1'
-				&& img->s[(int)(img->posX)]
-					[(int)(img->posY - img->planeY * WALKSPEED)] != 'C')
-			img->posY -= img->planeY * WALKSPEED;
+	if (img->s[(int)(img->pos_x)][(int)(img->pos_y - img->plane_y * WALKSPEED)]
+			&& img->s[(int)(img->pos_x)]
+				[(int)(img->pos_y - img->plane_y * WALKSPEED)] != '1'
+				&& img->s[(int)(img->pos_x)]
+					[(int)(img->pos_y - img->plane_y * WALKSPEED)] != 'C')
+			img->pos_y -= img->plane_y * WALKSPEED;
 		nextp_y = img->posy
 		+ (sin(img->player_dir + (M_PI / 2)) * WALKSPEED / 1.5);
 		nextp_x = img->posx
@@ -94,20 +94,20 @@ void	key_check_updown(int keycode, t_data *img)
 
 void	move_up(t_data *img, double nextp_x, double nextp_y, int skip)
 {
-	if (img->s[(int)(img->posX + img->dirX * WALKSPEED)]
-	[(int)(img->posY)] != '\0'
-		&& img->s[(int)(img->posX + img->dirX * WALKSPEED)]
-		[(int)(img->posY)] != '1' &&
-			img->s[(int)(img->posX + img->dirX * WALKSPEED)]
-			[(int)(img->posY)] != 'C' )
-		img->posX += img->dirX * WALKSPEED;
-	if (img->s[(int)(img->posX)]
-		[(int)(img->posY + img->dirY * WALKSPEED)] != '\0'
-			&& img->s[(int)(img->posX)]
-			[(int)(img->posY + img->dirY * WALKSPEED)] != '1'
-			&& img->s[(int)(img->posX)]
-			[(int)(img->posY + img->dirY * WALKSPEED)] != 'C')
-		img->posY += img->dirY * WALKSPEED;
+	if (img->s[(int)(img->pos_x + img->dir_x * WALKSPEED)]
+	[(int)(img->pos_y)] != '\0'
+		&& img->s[(int)(img->pos_x + img->dir_x * WALKSPEED)]
+		[(int)(img->pos_y)] != '1' &&
+			img->s[(int)(img->pos_x + img->dir_x * WALKSPEED)]
+			[(int)(img->pos_y)] != 'C' )
+		img->pos_x += img->dir_x * WALKSPEED;
+	if (img->s[(int)(img->pos_x)]
+		[(int)(img->pos_y + img->dir_y * WALKSPEED)] != '\0'
+			&& img->s[(int)(img->pos_x)]
+			[(int)(img->pos_y + img->dir_y * WALKSPEED)] != '1'
+			&& img->s[(int)(img->pos_x)]
+			[(int)(img->pos_y + img->dir_y * WALKSPEED)] != 'C')
+		img->pos_y += img->dir_y * WALKSPEED;
 	nextp_x = img->posx - (cos(img->player_dir) * WALKSPEED);
 	nextp_y = img->posy + (sin(img->player_dir) * WALKSPEED);
 	if (img->map[(int)nextp_y][(int)img->posx + skip] != '\0'

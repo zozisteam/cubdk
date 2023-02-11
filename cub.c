@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:31:44 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 14:57:25 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:51:23 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ void	raycast(t_data *img)
 	{
 		// calculate ray position and direction
 		double cameraX = 2 * x / (double)(SCREENWIDTH)-1; // x-coordinate in camera space
-		double rayDirX = img->dirX + +img->planeX * cameraX;
-		double rayDirY = img->dirY + img->planeY * cameraX;
+		double rayDirX = img->dir_x + +img->plane_x * cameraX;
+		double rayDirY = img->dir_y + img->plane_y * cameraX;
 		// which box of the map we're in
-		map_x = (int)(img->posX);
-		map_y = (int)(img->posY);
+		map_x = (int)(img->pos_x);
+		map_y = (int)(img->pos_y);
 
 		// length of ray from current position to next x or y-side
 		double sideDistX;
@@ -111,22 +111,22 @@ void	raycast(t_data *img)
 		if (rayDirX < 0)
 		{
 			stepX = -1;
-			sideDistX = (img->posX - map_x) * deltaDistX;
+			sideDistX = (img->pos_x - map_x) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = (map_x + 1.0 - img->posX) * deltaDistX;
+			sideDistX = (map_x + 1.0 - img->pos_x) * deltaDistX;
 		}
 		if (rayDirY < 0)
 		{
 			stepY = -1;
-			sideDistY = (img->posY - map_y) * deltaDistY;
+			sideDistY = (img->pos_y - map_y) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			sideDistY = (map_y + 1.0 - img->posY) * deltaDistY;
+			sideDistY = (map_y + 1.0 - img->pos_y) * deltaDistY;
 		}
 		// perform DDA
 		while (hit == 0)
@@ -159,20 +159,20 @@ void	raycast(t_data *img)
 		// Calculate height of line to draw on screen
 		int lineHeight = (int)(SCREENHEIGHT / perpWallDist);
 		// calculate lowest and highest pixel to fill in current stripe
-		img->drawStart = -lineHeight / 2 + SCREENHEIGHT / 2;
-		if (img->drawStart < 0)
-			img->drawStart = 0;
-		img->drawEnd = lineHeight / 2 + SCREENHEIGHT / 2;
-		if (img->drawEnd >= SCREENHEIGHT)
-			img->drawEnd = SCREENHEIGHT - 1;
-		if (img->drawStart >= SCREENHEIGHT)
-			img->drawStart = 0;
+		img->draw_start = -lineHeight / 2 + SCREENHEIGHT / 2;
+		if (img->draw_start < 0)
+			img->draw_start = 0;
+		img->draw_end = lineHeight / 2 + SCREENHEIGHT / 2;
+		if (img->draw_end >= SCREENHEIGHT)
+			img->draw_end = SCREENHEIGHT - 1;
+		if (img->draw_start >= SCREENHEIGHT)
+			img->draw_start = 0;
 		// calculate value of wallX
 		double wallX; // where exactly the wall was hit
 		if (side == 0)
-			wallX = img->posY + perpWallDist * rayDirY;
+			wallX = img->pos_y + perpWallDist * rayDirY;
 		else
-			wallX = img->posX + perpWallDist * rayDirX;
+			wallX = img->pos_x + perpWallDist * rayDirX;
 		wallX -= floor((wallX));
 		// x coordinate on the texture
 		int texX = (int)(wallX * (double)(TEXWIDTH));
@@ -185,11 +185,11 @@ void	raycast(t_data *img)
 		// draw the pixels of the stripe as a vertical line
 		double step = 1.0 * TEXHEIGHT / lineHeight;
 		// Starting texture coordinate
-		double texPos = (img->drawStart - SCREENHEIGHT / 2 + lineHeight / 2) * step;
+		double texPos = (img->draw_start - SCREENHEIGHT / 2 + lineHeight / 2) * step;
 		for (unsigned int y = 0; y < SCREENHEIGHT; y++)
 		{
 			// Cast the texture coordinate to integer, and mask with (TEXHEIGHT - 1) in case of overflow
-			if (y >= img->drawStart && y <= img->drawEnd)
+			if (y >= img->draw_start && y <= img->draw_end)
 			{
 				int texY = (int)texPos & (img->height[0] - 1);
 				texPos += step;
@@ -233,7 +233,7 @@ void	raycast(t_data *img)
 		i = 0;
 		while (i < SCREENHEIGHT)
 		{
-			if (i >= img->drawStart && i <= img->drawEnd)
+			if (i >= img->draw_start && i <= img->draw_end)
 			{
 				if (get_t(img->buffer[i][x]) > 0)
 				{

@@ -6,11 +6,11 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:03:32 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 14:52:12 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:57:19 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	my_mlx_pixel_put1(t_data *data, int x, int y, int color)
 {

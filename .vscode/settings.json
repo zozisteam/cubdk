@@ -1,0 +1,25 @@
+{
+	"files.associations": {
+		"algorithm": "c",
+		"complex": "c",
+		"new": "c",
+		"__config": "c",
+		"__errc": "c",
+		"__hash_table": "c",
+		"__locale": "c",
+		"bit": "c",
+		"functional": "c",
+		"locale": "c",
+		"string": "c",
+		"typeinfo": "c",
+		"__string": "c",
+		"chrono": "c",
+		"cstddef": "c",
+		"ios": "c",
+		"memory": "c",
+		"optional": "c",
+		"tuple": "c",
+		"type_traits": "c",
+		"utility": "c"
+	}
+}

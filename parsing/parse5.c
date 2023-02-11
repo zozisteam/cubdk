@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:47:03 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:40:56 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:55:12 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_color(t_data *data, int *n, int *j)
 		k += 3;
 		while (data->data[i][k] == ' ' || data->data[i][k] == '\t')
 			k++;
-		data->EA = ft_strdup(data->data[i] + k);
+		data->_ea = ft_strdup(data->data[i] + k);
 	}
 	else if (data->data[i][k] == 'S' && data->data[i][k + 1] == 'O')
 	{
@@ -35,7 +35,7 @@ int	check_color(t_data *data, int *n, int *j)
 		{
 			k++;
 		}
-		data->SO = ft_strdup(data->data[i] + k);
+		data->_so = ft_strdup(data->data[i] + k);
 	}
 	return (1);
 }
@@ -52,14 +52,14 @@ void	check_color2(t_data *data, int *n, int *j)
 		k += 3;
 		while (data->data[i][k] == ' ' || data->data[i][k] == '\t')
 			k++;
-		data->WE = ft_strdup(data->data[i] + k);
+		data->_we = ft_strdup(data->data[i] + k);
 	}
 	else if (data->data[i][k] == 'N' && data->data[i][k + 1] == 'O')
 	{
 		k += 3;
 		while (data->data[i][k] == ' ' || data->data[i][k] == '\t')
 			k++;
-		data->NO = ft_strdup(data->data[i] + k);
+		data->_no = ft_strdup(data->data[i] + k);
 	}
 }
 

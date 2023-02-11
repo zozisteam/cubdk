@@ -6,11 +6,11 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 07:50:23 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:38:55 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:57:10 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 char	**ft_lsttoarr(t_list *list)
 {

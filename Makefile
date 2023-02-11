@@ -1,6 +1,6 @@
 NAME = cub3d
 
-SRC = cub.c main.c keyevent.c utils.c parsing/parse.c parsing/parse2.c parsing/parse3.c parsing/parse4.c parsing/parse5.c parsing/parse6.c utils2.c utils3.c utils4.c utils5.c utlils6.c events.c read.c move_dowun.c
+SRC = cub.c main.c keyevent.c utils/utils.c parsing/parse.c parsing/parse2.c parsing/parse3.c parsing/parse4.c parsing/parse5.c parsing/parse6.c utils/utils2.c utils/utils3.c utils/utils4.c utils/utils5.c utils/utlils6.c events.c read.c move_dowun.c
 
 LIBFT = libft/libft.a
 PRINTF = ft_printf/libftprintf.a

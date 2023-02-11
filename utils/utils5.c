@@ -6,11 +6,11 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:57:28 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 14:51:47 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:57:26 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	draw_player(t_data *data)
 {
@@ -52,19 +52,19 @@ void	creat_imgs2(t_data *img)
 
 void	creat_imgs(t_data *img)
 {
-	img->ptr[0] = mlx_xpm_file_to_image(img->mlx, img->NO,
+	img->ptr[0] = mlx_xpm_file_to_image(img->mlx, img->_no,
 			&img->width[0], &img->height[0]);
 	img->texture[0] = (unsigned int (*))mlx_get_data_addr(img->ptr[0],
 			&img->bpp[0], &img->ll[0], &img->en[0]);
-	img->ptr[1] = mlx_xpm_file_to_image(img->mlx, img->SO,
+	img->ptr[1] = mlx_xpm_file_to_image(img->mlx, img->_so,
 			&img->width[1], &img->height[1]);
 	img->texture[1] = (unsigned int (*))mlx_get_data_addr(img->ptr[1],
 			&img->bpp[1], &img->ll[1], &img->en[1]);
-	img->ptr[2] = mlx_xpm_file_to_image(img->mlx, img->EA,
+	img->ptr[2] = mlx_xpm_file_to_image(img->mlx, img->_ea,
 			&img->width[2], &img->height[2]);
 	img->texture[2] = (unsigned int (*))mlx_get_data_addr(img->ptr[2],
 			&img->bpp[2], &img->ll[2], &img->en[2]);
-	img->ptr[3] = mlx_xpm_file_to_image(img->mlx, img->WE,
+	img->ptr[3] = mlx_xpm_file_to_image(img->mlx, img->_we,
 			&img->width[3], &img->height[3]);
 	img->texture[3] = (unsigned int (*))mlx_get_data_addr(img->ptr[3],
 			&img->bpp[3],

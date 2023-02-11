@@ -1,11 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/11 12:54:22 by alalmazr          #+#    #+#             */
+/*   Updated: 2023/02/11 12:55:43 by alalmazr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-// #include "../cub.h"
-
 # include "./libft/libft.h"
-// #include "./cub.h"
 # include "./ft_printf/ft_printf.h"
 # include "./mlx/mlx.h"
 # include <fcntl.h>
@@ -14,7 +22,6 @@
 # include <math.h>
 # include <stdbool.h>
 # include <unistd.h>
-# include <pthread.h>
 # include <signal.h>
 
 # define MAPWIDTH 24
@@ -42,7 +49,7 @@ typedef struct c_color
 	int		b;
 }t_ccolor;
 
-typedef	struct	s_data
+typedef struct s_data
 {
 	void				*img;
 	void				*img_minimap;
@@ -55,20 +62,20 @@ typedef	struct	s_data
 	int					en[4];
 	char				*first_line;
 	char				*addr;
-	double				posX;
-	double				posY;
-	double				dirX;
-	double				dirY;
-	double				planeX;
-	double				planeY;
+	double				pos_x;
+	double				pos_y;
+	double				dir_x;
+	double				dir_y;
+	double				plane_x;
+	double				plane_y;
 	char				**s;
 	unsigned int		buffer[SCREENHEIGHT][SCREENWIDTH];
 	int					width[4];
 	int					height[4];
 	char				**data;
 	char				**map;
-	unsigned int		drawStart;
-	unsigned int		drawEnd;
+	unsigned int		draw_start;
+	unsigned int		draw_end;
 	int					bits_per_pixel;
 	int					line_length;
 	int					endian;
@@ -80,10 +87,10 @@ typedef	struct	s_data
 	float				posx;
 	float				posy;
 	float				player_dir;
-	char				*EA;
-	char				*SO;
-	char				*WE;
-	char				*NO;
+	char				*_ea;
+	char				*_so;
+	char				*_we;
+	char				*_no;
 	t_ccolor			c_color;
 	t_fcolor			f_color;
 	unsigned long long	frame;
@@ -173,6 +180,5 @@ char	*read_meta_data(int fd, t_data *data);
 
 void	move_up(t_data *img, double nextp_x, double nextp_y, int skip);
 void	move_down(t_data *img, double nextp_x, double nextp_y, int skip);
-
 
 #endif

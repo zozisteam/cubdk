@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:10 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 14:53:30 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:50:43 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,23 @@ void	key_check_rotate(int keycode, t_data *img)
 
 	if (keycode == 124)
 	{
-		olddirx = img->dirX;
-		img->dirX = img->dirX * cos(-ROTSPEED) - img->dirY * sin(-ROTSPEED);
-		img->dirY = olddirx * sin(-ROTSPEED) + img->dirY * cos(-ROTSPEED);
-		oldplanex = img->planeX;
-		img->planeX = img->planeX
-			* cos(-ROTSPEED) - img->planeY * sin(-ROTSPEED);
-		img->planeY = oldplanex * sin(-ROTSPEED) + img->planeY * cos(-ROTSPEED);
+		olddirx = img->dir_x;
+		img->dir_x = img->dir_x * cos(-ROTSPEED) - img->dir_y * sin(-ROTSPEED);
+		img->dir_y = olddirx * sin(-ROTSPEED) + img->dir_y * cos(-ROTSPEED);
+		oldplanex = img->plane_x;
+		img->plane_x = img->plane_x
+			* cos(-ROTSPEED) - img->plane_y * sin(-ROTSPEED);
+		img->plane_y = oldplanex * sin(-ROTSPEED) + img->plane_y * cos(-ROTSPEED);
 		img->player_dir -= ROTSPEED;
 	}
 	else if (keycode == 123)
 	{
-		olddirx = img->dirX;
-		img->dirX = img->dirX * cos(ROTSPEED) - img->dirY * sin(ROTSPEED);
-		img->dirY = olddirx * sin(ROTSPEED) + img->dirY * cos(ROTSPEED);
-		oldplanex = img->planeX;
-		img->planeX = img->planeX * cos(ROTSPEED) - img->planeY * sin(ROTSPEED);
-		img->planeY = oldplanex * sin(ROTSPEED) + img->planeY * cos(ROTSPEED);
+		olddirx = img->dir_x;
+		img->dir_x = img->dir_x * cos(ROTSPEED) - img->dir_y * sin(ROTSPEED);
+		img->dir_y = olddirx * sin(ROTSPEED) + img->dir_y * cos(ROTSPEED);
+		oldplanex = img->plane_x;
+		img->plane_x = img->plane_x * cos(ROTSPEED) - img->plane_y * sin(ROTSPEED);
+		img->plane_y = oldplanex * sin(ROTSPEED) + img->plane_y * cos(ROTSPEED);
 				img->player_dir += ROTSPEED;
 	}
 }

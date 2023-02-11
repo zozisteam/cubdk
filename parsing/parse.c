@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:57:12 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:40:41 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:55:12 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ int	invalid_map(char **map)
 
 int	chek_imgs(t_data *data)
 {
-	if (invalid_img(data->EA) == 0)
+	if (invalid_img(data->_ea) == 0)
 		return (0);
-	if (invalid_img(data->SO) == 0)
+	if (invalid_img(data->_so) == 0)
 		return (0);
-	if (invalid_img(data->WE) == 0)
+	if (invalid_img(data->_we) == 0)
 		return (0);
-	if (invalid_img(data->NO) == 0)
+	if (invalid_img(data->_no) == 0)
 		return (0);
 	return (1);
 }

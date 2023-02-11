@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 07:01:22 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:40:34 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:50:43 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,23 @@ void	ftset_player_dir(t_data *img, int j, int k)
 {
 	if (img->s[j][k] == 'S')
 	{
-		img->dirX = 1;
-		img->planeY = -0.66;
+		img->dir_x = 1;
+		img->plane_y = -0.66;
 	}
 	else if (img->s[j][k] == 'E')
 	{
-		img->dirY = 1;
-		img->planeX = 0.66;
+		img->dir_y = 1;
+		img->plane_x = 0.66;
 	}
 	else if (img->s[j][k] == 'W')
 	{
-		img->dirY = -1;
-		img->planeX = -0.66;
+		img->dir_y = -1;
+		img->plane_x = -0.66;
 	}
 	else
 	{
-		img->dirX = -1;
-		img->planeY = 0.66;
+		img->dir_x = -1;
+		img->plane_y = 0.66;
 	}
 }
 
@@ -103,27 +103,27 @@ void	set_pos(t_data *img)
 			if (img->s[j][k] == 'W' || img->s[j][k] == 'N'
 			|| img->s[j][k] == 'S' || img->s[j][k] == 'E')
 			{
-				img->posX = j + 0.5;
-				img->posY = k + 0.5;
+				img->pos_x = j + 0.5;
+				img->pos_y = k + 0.5;
 				if (img->s[j][k] == 'S')
 				{
-					img->dirX = 1;
-					img->planeY = -0.66;
+					img->dir_x = 1;
+					img->plane_y = -0.66;
 				}
 				else if (img->s[j][k] == 'E')
 				{
-					img->dirY = 1;
-					img->planeX = 0.66;
+					img->dir_y = 1;
+					img->plane_x = 0.66;
 				}
 				else if (img->s[j][k] == 'W')
 				{
-					img->dirY = -1;
-					img->planeX = -0.66;
+					img->dir_y = -1;
+					img->plane_x = -0.66;
 				}
 				else
 				{
-					img->dirX = -1;
-					img->planeY = 0.66;
+					img->dir_x = -1;
+					img->plane_y = 0.66;
 				}
 				break ;
 			}

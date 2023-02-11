@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 08:04:23 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:40:10 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:55:12 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int	invalid_img(char *str)
 
 int	exist_image(t_data *data)
 {
-	if (check_img_exist(data->EA) == 0)
+	if (check_img_exist(data->_ea) == 0)
 		return (0);
-	if (check_img_exist(data->SO) == 0)
+	if (check_img_exist(data->_so) == 0)
 		return (0);
-	if (check_img_exist(data->WE) == 0)
+	if (check_img_exist(data->_we) == 0)
 		return (0);
-	if (check_img_exist(data->NO) == 0)
+	if (check_img_exist(data->_no) == 0)
 		return (0);
 	return (1);
 }

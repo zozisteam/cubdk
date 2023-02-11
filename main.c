@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:30:56 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 14:45:24 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/11 13:02:47 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,23 @@ void	ft_set_player_dir(t_data *img, int j, int k)
 {
 	if (img->s[j][k] == 'S')
 	{
-		img->dirX = 1;
-		img->planeY = -0.66;
+		img->dir_x = 1;
+		img->plane_y = -0.66;
 	}
 	else if (img->s[j][k] == 'E')
 	{
-		img->dirY = 1;
-		img->planeX = 0.66;
+		img->dir_y = 1;
+		img->plane_x = 0.66;
 	}
 	else if (img->s[j][k] == 'W')
 	{
-		img->dirY = -1;
-		img->planeX = -0.66;
+		img->dir_y = -1;
+		img->plane_x = -0.66;
 	}
 	else
 	{
-		img->dirX = -1;
-		img->planeY = 0.66;
+		img->dir_x = -1;
+		img->plane_y = 0.66;
 	}
 }
 
@@ -92,11 +92,11 @@ int	main(int ac, char **av)
 	init(&img);
 	img.size = 900 / (max_size + with);
 	img.frame = 0;
-	img.posX = img.posx;
-	img.posY = img.posy;
+	img.pos_x = img.posx;
+	img.pos_y = img.posy;
 	set_pos(&img);
-	img.drawStart = 0;
-	img.drawEnd = 0;
+	img.draw_start = 0;
+	img.draw_end = 0;
 	creat_imgs(&img);
 	minimap(&img);
 	raycast(&img);

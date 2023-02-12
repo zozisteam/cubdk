@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:30:56 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/11 13:02:47 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/12 21:54:16 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,10 @@ int	main(int ac, char **av)
 		exit(1);
 	read_map(av[1], &img);
 	check_error(&img);
-	max_size = f_lline(&img);
+	max_size = max_line_len(&img);//max line length in map
 	with = arr_2d_len((void **)img.map);
 	init(&img);
-	img.size = 900 / (max_size + with);
+	img.size = 500 / (max_size + with);
 	img.frame = 0;
 	img.pos_x = img.posx;
 	img.pos_y = img.posy;

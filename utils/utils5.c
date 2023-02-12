@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:57:28 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/11 12:57:26 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/12 21:45:38 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	creat_imgs2(t_data *img)
 			"./img/gun4b.xpm", &i, &i);
 }
 
+//WALLS
+//processing imgs and storing in textures array for each image
 void	creat_imgs(t_data *img)
 {
 	img->ptr[0] = mlx_xpm_file_to_image(img->mlx, img->_no,

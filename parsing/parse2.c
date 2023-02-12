@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 07:01:22 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/11 12:50:43 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/12 21:54:16 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	init(t_data	*img)
 	int	skip;
 
 	img->mlx = mlx_init();
-	max_size = f_lline(img);
+	max_size = max_line_len(img);
 	with = arr_2d_len((void **)img->map);
-	size = 900 / (max_size + with);
+	size = 500 / (max_size + with);
 	skip = first_space(img->map);
 	img->img_minimap = mlx_new_image(img->mlx, size
 			* (max_size - skip), with * size);
@@ -54,7 +54,7 @@ void	init(t_data	*img)
 			&img->bpp_line, &img->size_line, &img->endian);
 	img->s = roted_array(img->map);
 	img->win = mlx_new_window(img->mlx,
-			SCREENWIDTH, SCREENHEIGHT, "Hello world!");
+			SCREENWIDTH, SCREENHEIGHT, "game for ***s");
 	img->img = mlx_new_image(img->mlx, SCREENWIDTH, SCREENHEIGHT);
 	img->img_alpha = mlx_new_image(img->mlx, SCREENWIDTH, SCREENHEIGHT);
 	img->addr = mlx_get_data_addr(img->img,
@@ -88,6 +88,7 @@ void	ftset_player_dir(t_data *img, int j, int k)
 	}
 }
 
+//set player position
 void	set_pos(t_data *img)
 {
 	int	j;

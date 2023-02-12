@@ -20,6 +20,20 @@
 		"optional": "c",
 		"tuple": "c",
 		"type_traits": "c",
-		"utility": "c"
+		"utility": "c",
+		"__split_buffer": "c",
+		"array": "c",
+		"bitset": "c",
+		"cstdio": "c",
+		"cstdlib": "c",
+		"memory_resource": "c",
+		"initializer_list": "c",
+		"istream": "c",
+		"iterator": "c",
+		"ostream": "c",
+		"sstream": "c",
+		"string_view": "c",
+		"unordered_map": "c",
+		"vector": "c"
 	}
 }

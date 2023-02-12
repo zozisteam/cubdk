@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:54:22 by alalmazr          #+#    #+#             */
-/*   Updated: 2023/02/11 12:55:43 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/12 21:54:40 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,8 @@ void	draw_player(t_data *data);
 int		first_space(char **line);
 void	draw_map( t_data *data);
 void	draw_line(t_data *data);
+int		max_line_len(t_data *data);
 void	my_mlx_pixel_put(t_data *game, int x, int y, int color);
-int		f_lline(t_data *data);
-void	white_box(t_data *game, int x, int y, int color);
 void	my_mlx_pixel_put1(t_data *data, int x, int y, int color);
 void	minimap(t_data *data);
 char	**roted_arr(char **arr);
@@ -177,7 +176,8 @@ void	make_map(t_list *list, t_data *data);
 void	read_map(char *str, t_data *data);
 int		open_file(char *str);
 char	*read_meta_data(int fd, t_data *data);
-
+void	minimap_player(t_data *game, int x, int y, int color);
+void	minimap_walls(t_data *game, int x, int y, int color);
 void	move_up(t_data *img, double nextp_x, double nextp_y, int skip);
 void	move_down(t_data *img, double nextp_x, double nextp_y, int skip);
 

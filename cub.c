@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:31:44 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/11 12:51:23 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/12 21:54:16 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,14 +246,14 @@ void	raycast(t_data *img)
 		}
 		x++;
 	}
-	int max_size = f_lline(img);
+	int max_size = max_line_len(img);
 	int with = arr_2d_len((void **)img->map);
 
 	int skip = first_space(img->map);
-	int size = 900 / (max_size + with);
+	int size = 500 / (max_size + with);
 	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
-	ft_bzero(img->minimap_addr, with * size * (max_size * size - skip) * (img->bpp_line / 8));
-	white_box(img, img->posx * size, img->posy * size, 0x00FF0000);
+	ft_bzero(img->minimap_addr, with * size * (max_size * size - skip) * (img->bpp_line / 8)); //erasing 
+	minimap_player(img, img->posx * size, img->posy * size, 0x00FF0000);
 	minimap(img);
 	mlx_put_image_to_window(img->mlx, img->win, img->gun1, 450, 510);
 	frame++;

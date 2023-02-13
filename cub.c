@@ -6,13 +6,13 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:31:44 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:38:55 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/10 08:43:16 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_name(char *str)
+void check_name(char *str)
 {
 	while (*str)
 	{
@@ -23,15 +23,15 @@ void	check_name(char *str)
 				exit(EXIT_FAILURE);
 			}
 			else
-				break ;
+				break;
 		}
 		str++;
 	}
 }
 
-int	open_file(char *str)
+int open_file(char *str)
 {
-	int	fd;
+	int fd;
 
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
@@ -39,11 +39,11 @@ int	open_file(char *str)
 	return (fd);
 }
 
-char	*read_meta_data(int fd, t_data *data)
+char *read_meta_data(int fd, t_data *data)
 {
-	char	*line;
-	char	*tmp;
-	int		z;
+	char *line;
+	char *tmp;
+	int z;
 
 	line = NULL;
 	tmp = NULL;
@@ -54,12 +54,12 @@ char	*read_meta_data(int fd, t_data *data)
 		if (!line || start_one(line))
 		{
 			z = 1;
-			break ;
+			break;
 		}
 		if (ft_strlen(line) == 0)
 		{
 			free(line);
-			continue ;
+			continue;
 		}
 		line = ft_strtrim(line, " \t");
 		tmp = ft_strjoin_mod(tmp, line);
@@ -69,7 +69,7 @@ char	*read_meta_data(int fd, t_data *data)
 	return (tmp);
 }
 
-int	get_t(int trgb)
+int get_t(int trgb)
 {
 	return ((trgb >> 24) & 0xFF);
 }
@@ -168,13 +168,7 @@ void raycast(t_data *img)
 			img->drawEnd = SCREENHEIGHT - 1;
 		if (img->drawStart >= SCREENHEIGHT)
 			img->drawStart = 0;
-		// choose wall color
-		//  int color;
-		//  switch(img->s[mapX][mapY])
-		//  {
-		//  	case '1':  color = 0x00FF0000;  break; //red
-		//  	default: color = 0x00000000; break; //yellow
-		//  }
+
 		// calculate value of wallX
 		double wallX; // where exactly the wall was hit
 		if (side == 0)
@@ -206,14 +200,12 @@ void raycast(t_data *img)
 				if (side == 0 && rayDirX > 0)
 				{
 					if (hit == 1)
-						color = (int)img->texture[0][(int)TEXHEIGHT * texY + texX] ;
-
+						color = (int)img->texture[0][(int)TEXHEIGHT * texY + texX];
 				}
 				else if (side == 0 && rayDirX < 0)
 				{
 					if (hit == 1)
 						color = (int)img->texture[1][(int)TEXHEIGHT * texY + texX];
-
 				}
 				else if (side == 1 && rayDirY > 0)
 				{
@@ -223,7 +215,7 @@ void raycast(t_data *img)
 				else if (side == 1 && rayDirY < 0)
 				{
 					if (hit == 1)
-						color = (int)img->texture[3][(int)TEXHEIGHT * texY + texX] ;
+						color = (int)img->texture[3][(int)TEXHEIGHT * texY + texX];
 				}
 				if (side == 1)
 					color = (color >> 1) & 8355711;

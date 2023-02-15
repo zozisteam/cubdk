@@ -5,61 +5,61 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 09:47:03 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:40:56 by alalmazr         ###   ########.fr       */
+/*   Created: 2023/02/13 16:59:07 by mraspors          #+#    #+#             */
+/*   Updated: 2023/02/15 17:17:40 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	check_color(t_data *data, int *n, int *j)
+int	check_color(t_game *game, int *n, int *j)
 {
 	int	i;
 	int	k;
 
 	i = *j;
 	k = *n;
-	while (data->data[i][k] == ' ' || data->data[i][k] == '\t')
+	while (game->data[i][k] == ' ' || game->data[i][k] == '\t')
 			k++;
-	if (data->data[i][k] == 'E' && data->data[i][k + 1] == 'A')
+	if (game->data[i][k] == 'E' && game->data[i][k + 1] == 'A')
 	{
 		k += 3;
-		while (data->data[i][k] == ' ' || data->data[i][k] == '\t')
+		while (game->data[i][k] == ' ' || game->data[i][k] == '\t')
 			k++;
-		data->EA = ft_strdup(data->data[i] + k);
+		game->_ea = ft_strdup(game->data[i] + k);
 	}
-	else if (data->data[i][k] == 'S' && data->data[i][k + 1] == 'O')
+	else if (game->data[i][k] == 'S' && game->data[i][k + 1] == 'O')
 	{
 		k += 3;
-		while (data->data[i][k] == ' ' || data->data[i][k] == '\t')
+		while (game->data[i][k] == ' ' || game->data[i][k] == '\t')
 		{
 			k++;
 		}
-		data->SO = ft_strdup(data->data[i] + k);
+		game->_so = ft_strdup(game->data[i] + k);
 	}
 	return (1);
 }
 
-void	check_color2(t_data *data, int *n, int *j)
+void	check_color2(t_game *game, int *n, int *j)
 {
 	int	i;
 	int	k;
 
 	i = *j;
 	k = *n;
-	if (data->data[i][k] == 'W' && data->data[i][k + 1] == 'E')
+	if (game->data[i][k] == 'W' && game->data[i][k + 1] == 'E')
 	{
 		k += 3;
-		while (data->data[i][k] == ' ' || data->data[i][k] == '\t')
+		while (game->data[i][k] == ' ' || game->data[i][k] == '\t')
 			k++;
-		data->WE = ft_strdup(data->data[i] + k);
+		game->_we = ft_strdup(game->data[i] + k);
 	}
-	else if (data->data[i][k] == 'N' && data->data[i][k + 1] == 'O')
+	else if (game->data[i][k] == 'N' && game->data[i][k + 1] == 'O')
 	{
 		k += 3;
-		while (data->data[i][k] == ' ' || data->data[i][k] == '\t')
+		while (game->data[i][k] == ' ' || game->data[i][k] == '\t')
 			k++;
-		data->NO = ft_strdup(data->data[i] + k);
+		game->_no = ft_strdup(game->data[i] + k);
 	}
 }
 
@@ -88,7 +88,7 @@ int	cheack_zero_helper(char **map, int *i, int *j)
 	return (1);
 }
 
-int	check_zeros(t_data *data)
+int	check_zeros(t_game *game)
 {
 	int		i;
 	int		j;
@@ -96,7 +96,7 @@ int	check_zeros(t_data *data)
 
 	i = 0;
 	j = 0;
-	map = data->map;
+	map = game->map;
 	while (map[i])
 	{
 		j = 0;

@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/31 12:40:18 by mraspors          #+#    #+#             */
-/*   Updated: 2021/12/31 12:40:18 by mraspors         ###   ########.fr       */
+/*   Created: 2022/07/23 14:51:55 by mraspors          #+#    #+#             */
+/*   Updated: 2022/10/27 02:20:57 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+#include <stdio.h>
+
+int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
 
 	i = 0;
-	if (s != NULL)
-	{
-		while (s[i] != '\0')
-		{
-			write(fd, &s[i], 1);
-			i++;
-		}
-	}
-	write(fd, "\n", 1);
+	if (s1 == NULL || s2 == NULL)
+		return (1);
+	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
+		i++;
+	return (s1[i] - s2[i]);
 }

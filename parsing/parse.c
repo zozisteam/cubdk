@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 14:57:12 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:40:41 by alalmazr         ###   ########.fr       */
+/*   Created: 2023/02/13 16:58:49 by mraspors          #+#    #+#             */
+/*   Updated: 2023/02/15 17:13:09 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,20 @@ int	invalid_map(char **map)
 	return (1);
 }
 
-int	chek_imgs(t_data *data)
+int	chek_imgs(t_game *game)
 {
-	if (invalid_img(data->EA) == 0)
+	if (invalid_img(game->_ea) == 0)
 		return (0);
-	if (invalid_img(data->SO) == 0)
+	if (invalid_img(game->_so) == 0)
 		return (0);
-	if (invalid_img(data->WE) == 0)
+	if (invalid_img(game->_we) == 0)
 		return (0);
-	if (invalid_img(data->NO) == 0)
+	if (invalid_img(game->_no) == 0)
 		return (0);
 	return (1);
 }
 
-int	cheack_if_dirc(char **map)
+int	check_dir(char **map)
 {
 	int	i;
 	int	j;

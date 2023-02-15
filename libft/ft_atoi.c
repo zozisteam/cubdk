@@ -3,45 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 08:12:15 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/01/07 17:19:17 by abin-saa         ###   ########.fr       */
+/*   Created: 2021/06/29 12:05:31 by mraspors          #+#    #+#             */
+/*   Updated: 2022/01/27 07:42:32 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
+
+int	ft_check(const char *str, int *i)
+{
+	if (str[*i] == '+')
+	{
+		*i = *i + 1;
+		return (1);
+	}
+	if (str[*i] == '-')
+	{
+		*i = *i + 1;
+		return (-1);
+	}
+	if (str[*i] < 48 || str[*i] > 57)
+		return (0);
+	if (str[*i] >= 48 || str[*i] <= 57)
+		return (1);
+	return (0);
+}
+
+int	ret_int(unsigned long integer, int flag)
+{
+	if (integer > 2147483647 && flag == 1)
+		return (-1);
+	if (integer > 2147483648 && flag == -1)
+		return (0);
+	if (flag == -1)
+		integer *= -1;
+	return (integer);
+}
 
 int	ft_atoi(const char *str)
 {
 	int				i;
-	int				k;
-	unsigned long	value;
+	unsigned long	integer;
+	int				flag;
 
+	integer = 0;
 	i = 0;
-	k = 1;
-	value = 0;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
-	if (str[i] == '+' || str[i] == '-')
+	flag = ft_check(str, &i);
+	if (flag == 0)
+		return (0);
+	while (str[i] >= 48 && str[i] <= 57)
 	{
-		if (str[i] == '-')
-			k = k * -1;
+		integer += (str[i] - '0');
+		if (str[i + 1] >= 48 && str[i + 1] <= 57)
+			integer *= 10;
+		else
+			break ;
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		value = (value * 10) + (str[i] - 48);
-		i++;
-		if ((value > 2147483647 && k == 1) || (value > 2147483648 && k == -1))
-			return(-1);
-
-	}
-	return (value * k);
+	integer = ret_int(integer, flag);
+	return (integer);
 }
-
-// int main()
-// {
-//     printf("%d",ft_atoi("-50"));
-//     return (0);
-// }

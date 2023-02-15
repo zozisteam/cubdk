@@ -3,24 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 17:48:28 by abin-saa          #+#    #+#             */
-/*   Updated: 2022/06/02 16:17:43 by abin-saa         ###   ########.fr       */
+/*   Created: 2021/12/22 08:19:11 by mraspors          #+#    #+#             */
+/*   Updated: 2021/12/22 08:51:37 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t nitems, size_t size)
 {
-	char	*abood;
+	char	*pointer;
+	size_t	i;
 
-	if ((size != 0 && count > SIZE_MAX / size))
+	if (nitems == 0 || size == 0)
+	{
+		pointer = malloc(nitems * size);
+		pointer[0] = '\0';
+		return (pointer);
+	}
+	pointer = malloc(nitems * size);
+	if (!pointer)
 		return (NULL);
-	abood = malloc ((count * size));
-	if (!abood)
-		return (NULL);
-	ft_bzero (abood, (count * size));
-	return (abood);
+	i = 0;
+	while (i < nitems * size)
+		pointer[i++] = '\0';
+	return (pointer);
 }

@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_print_number.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/31 12:40:18 by mraspors          #+#    #+#             */
-/*   Updated: 2021/12/31 12:40:18 by mraspors         ###   ########.fr       */
+/*   Created: 2022/01/19 21:08:55 by mraspors          #+#    #+#             */
+/*   Updated: 2022/03/20 18:48:13 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+int	ft_print_number(int nbr)
 {
-	int	i;
+	char	c;
+	int		length;
 
-	i = 0;
-	if (s != NULL)
+	length = 0;
+	if (nbr == -2147483648)
 	{
-		while (s[i] != '\0')
-		{
-			write(fd, &s[i], 1);
-			i++;
-		}
+		write (1, "-2147483648", 11);
+		return (11);
 	}
-	write(fd, "\n", 1);
+	if (nbr < 0)
+	{
+		length += ft_print_char('-');
+		nbr *= -1;
+	}
+	if (nbr >= 10)
+		length += ft_print_number(nbr / 10);
+	c = nbr % 10 + '0';
+	length += ft_print_char(c);
+	return (length);
 }

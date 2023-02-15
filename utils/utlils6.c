@@ -5,29 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 15:07:45 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:41:16 by alalmazr         ###   ########.fr       */
+/*   Created: 2023/02/13 16:58:41 by mraspors          #+#    #+#             */
+/*   Updated: 2023/02/15 17:12:47 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	frame_counter(void *data)
 {
-	t_data	*img;
+	t_game	*game;
 
-	img = (t_data *)data;
-	img->frame++;
-	raycast(img);
+	game = (t_game *)data;
+	game->frame++;
+	raycast(game);
 	return (0);
 }
 
-int	mouse_hook(int keycode, int x, int y, t_data *img)
+int	get_t(int trgb)
 {
-	(void)x;
-	(void)y;
-	(void)img;
-	if (keycode == 1)
-		mlx_put_image_to_window(img->mlx, img->win, img->gun2, 450, 510);
-	return (0);
+	return ((trgb >> 24) & 0xFF);
 }

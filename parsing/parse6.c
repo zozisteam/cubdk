@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 17:19:57 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:38:55 by alalmazr         ###   ########.fr       */
+/*   Created: 2023/02/13 16:59:11 by mraspors          #+#    #+#             */
+/*   Updated: 2023/02/15 17:18:13 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_exit(void)
 	return (0);
 }
 
-char	**roted_array(char **arr)
+char	**rotate_arr(char **arr)
 {
 	int		i;
 	int		j;

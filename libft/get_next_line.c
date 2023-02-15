@@ -3,121 +3,83 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/25 15:46:04 by abin-saa          #+#    #+#             */
-/*   Updated: 2022/07/18 09:57:40 by abin-saa         ###   ########.fr       */
+/*   Created: 2022/02/08 21:05:23 by mraspors          #+#    #+#             */
+/*   Updated: 2022/02/22 03:24:45 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_read(int fd, char *str)
+char	*fill_buf(char *buf, int loc)
 {
-	char	*buff;
-	int		len;
+	char	*result;
 
-	buff = malloc((BUFFER_SIZE + 2) * sizeof(char));
-	if (!buff)
-		return (NULL);
-	len = 1;
-	while (!ft_strchr_gnl(str, '\n') && (len != 0))
-	{
-		len = read(fd, buff, BUFFER_SIZE);
-		if (len == -1)
-		{
-			free(buff);
-			return (NULL);
-		}
-		buff[len] = '\0';
-		str = ft_strjoin_mod(str, buff);
-	}
-	free(buff);
-	return (str);
+	result = NULL;
+	if (loc == -1)
+		result = NULL;
+	else
+		result = ft_strjoin_gnl(NULL, &buf[loc + 1]);
+	free(buf);
+	buf = NULL;
+	return (result);
 }
 
-char	*ft_skip(char *old_buffer)
+char	*create_result(char *buf, int loc)
 {
-	int		i;
-	int		j;
-	char	*new_buffer;
+	char	c;
+	char	*result;
 
-	i = 0;
-	while (old_buffer[i] != '\0' && old_buffer[i] != '\n')
-		i++;
-	if (old_buffer[i] == '\0')
+	if (!buf)
+		return (NULL);
+	if (loc == -1)
 	{
-		free(old_buffer);
-		return (NULL);
+		result = ft_strjoin_gnl(NULL, buf);
+		return (result);
 	}
-	new_buffer = malloc(sizeof(char) * (ft_strlen(old_buffer) - i + 1));
-	if (new_buffer == NULL)
-		return (NULL);
-	i++;
-	j = 0;
-	while (old_buffer[i] != '\0')
-		new_buffer[j++] = old_buffer[i++];
-	new_buffer[j] = '\0';
-	free(old_buffer);
-	return (new_buffer);
+	c = buf[loc + 1];
+	buf[loc + 1] = '\0';
+	result = ft_strjoin_gnl(NULL, buf);
+	buf[loc + 1] = c;
+	return (result);
 }
 
-char	*ft_line(char *str)
+char	*ft_read(int fd, char *buf, int *loc)
 {
+	char	s[2];
+	int		read_c;
 	int		i;
-	char	*line_new;
 
 	i = 0;
-	if (!str[i])
-		return (NULL);
-	while (str[i] && str[i] != '\n')
-		i++;
-	line_new = (char *)malloc(sizeof(char) * (i + 2));
-	if (!line_new)
-		return (NULL);
-	i = 0;
-	while (str[i] && str[i] != '\n')
+	read_c = 0;
+	while (ft_strchr_gnl(buf, &i, loc) == -1)
 	{
-		line_new[i] = str[i];
-		i++;
+		read_c = read(fd, s, 1);
+		if (read_c <= 0)
+			break ;
+		s[read_c] = '\0';
+		buf = ft_strjoin_gnl(buf, s);
 	}
-	if (str[i] == '\n')
-	{
-		line_new[i] = str[i];
-		i++;
-	}
-	line_new[i] = '\0';
-	return (line_new);
+	return (buf);
 }
 
 char	*get_next_line(int fd)
 {
-	char		*line;
-	static char	*buffer;
+	static char	*buf;
+	char		*result;
+	int			loc;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	buffer = ft_read(fd, buffer);
-	if (!buffer)
+	loc = 0;
+	result = NULL;
+	if (fd < 0 || fd > 1024)
 		return (NULL);
-	line = ft_line(buffer);
-	buffer = ft_skip(buffer);
-	return (line);
+	buf = ft_read(fd, buf, &loc);
+	if (buf == NULL)
+		return (NULL);
+	result = create_result(buf, loc);
+	buf = fill_buf(buf, loc);
+	if (result[0] == '\0')
+		result = NULL;
+	return (result);
 }
-
-// #include <fcntl.h>
-// #include <stdio.h>
-
-// int main()
-// {
-// 	int fd =open("empty", O_RDONLY);
-// 	char *line = get_next_line(fd);
-// 	// printf("%s", line);
-
-// 	while (line != NULL)
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 		line = get_next_line(fd);
-// 	}
-// }

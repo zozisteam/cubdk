@@ -5,37 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 09:43:04 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:41:04 by alalmazr         ###   ########.fr       */
+/*   Created: 2023/02/13 16:59:03 by mraspors          #+#    #+#             */
+/*   Updated: 2023/02/15 17:15:25 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	check_color3(t_data *data, int *n, int *j)
+void	check_color3(t_game *game, int *n, int *j)
 {
 	int	i;
 	int	k;
 
 	i = *j;
 	k = *n;
-	if (data->data[i][k] == 'F')
+	if (game->data[i][k] == 'F')
 	{
 		k += 2;
-		while (data->data[i][k] == ' ' || data->data[i][k] == '\t')
+		while (game->data[i][k] == ' ' || game->data[i][k] == '\t')
 			k++;
-		data->f_color.f = ft_strdup(data->data[i] + k);
+		game->f_color.f = ft_strdup(game->data[i] + k);
 	}
-	if (data->data[i][k] == 'C')
+	if (game->data[i][k] == 'C')
 	{
 		k += 2;
-		while (data->data[i][k] == ' ' || data->data[i][k] == '\t')
+		while (game->data[i][k] == ' ' || game->data[i][k] == '\t')
 			k++;
-		data->c_color.c = ft_strdup(data->data[i] + k);
+		game->c_color.c = ft_strdup(game->data[i] + k);
 	}
 }
 
-int	cheack_colore4(t_data *data)
+int	cheack_colore4(t_game *data)
 {
 	int	i;
 	int	k;
@@ -60,7 +60,7 @@ int	cheack_colore4(t_data *data)
 	return (1);
 }
 
-int	fill_data(t_data *data)
+int	fill_data(t_game *data)
 {
 	int	i;
 	int	k;
@@ -78,31 +78,31 @@ int	fill_data(t_data *data)
 	return (1);
 }
 
-void	fill_the_colore2(t_data *data)
+void	fill_the_colore2(t_game *data)
 {
 	char	**tmp;
 
 	tmp = ft_split(data->f_color.f, ',');
 	if (tmp[2] == NULL)
-		ft_error();
+		error_();
 	data->f_color.r = ft_atoi(tmp[0]);
 	data->f_color.g = ft_atoi(tmp[1]);
 	data->f_color.b = ft_atoi(tmp[2]);
 	ft_freearray((void **)tmp);
 	tmp = ft_split(data->c_color.c, ',');
 	if (tmp[1] == NULL)
-		ft_error();
+		error_();
 	if (tmp[0] == NULL)
-		ft_error();
+		error_();
 	data->c_color.r = ft_atoi(tmp[0]);
 	data->c_color.g = ft_atoi(tmp[1]);
 	if (tmp[2] == NULL)
-		ft_error();
+		error_();
 	data->c_color.b = ft_atoi(tmp[2]);
 	ft_freearray((void **)tmp);
 }
 
-int	fill_color(t_data *data)
+int	fill_color(t_game *data)
 {
 	int		i;
 	int		k;

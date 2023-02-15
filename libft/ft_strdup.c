@@ -3,29 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 18:15:05 by abin-saa          #+#    #+#             */
-/*   Updated: 2022/05/29 11:43:16 by abin-saa         ###   ########.fr       */
+/*   Created: 2021/12/22 08:53:10 by mraspors          #+#    #+#             */
+/*   Updated: 2021/12/22 08:53:12 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *string)
 {
-	char	*c;
+	char	*str;
 	int		i;
 
-	c = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
-	if (!c)
+	i = 0;
+	while (string[i] != '\0')
+		i++;
+	str = (char *)malloc((i + 1) * sizeof(char));
+	if (!str)
 		return (NULL);
 	i = 0;
-	while (s1[i] != '\0')
+	while (string[i] != '\0')
 	{
-		c[i] = s1[i];
+		str[i] = string[i];
 		i++;
 	}
-	c[i] = '\0';
-	return (c);
+	str[i] = '\0';
+	return (str);
 }

@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_print_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 10:33:22 by abin-saa          #+#    #+#             */
-/*   Updated: 2022/06/07 12:24:49 by abin-saa         ###   ########.fr       */
+/*   Created: 2022/01/19 21:08:33 by mraspors          #+#    #+#             */
+/*   Updated: 2022/03/20 18:48:19 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putchar(char c)
+int	ft_print_string(char *str)
 {
-	return (write(1, &c, 1));
+	int	i;
+	int	length;
+
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	i = 0;
+	length = 0;
+	while (str[i] != '\0')
+	{
+		length += ft_print_char(str[i]);
+		i++;
+	}
+	return (length);
 }

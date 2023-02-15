@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 09:13:10 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/04 09:15:29 by abin-saa         ###   ########.fr       */
+/*   Created: 2023/02/13 16:56:35 by mraspors          #+#    #+#             */
+/*   Updated: 2023/02/15 17:18:38 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*read_first_line(int fd)
 
 	line = get_next_line(fd);
 	if (line == NULL)
-		ft_error();
+		error_();
 	free_line = line;
 	line = ft_strtrim(free_line, " \t");
 	free(free_line);
@@ -40,14 +40,14 @@ char	*remove_empty_lines(char *line, int fd)
 	return (line);
 }
 
-t_list	*get_lines(int fd, t_data *data)
+t_list	*get_lines(int fd, t_game *game)
 {
 	t_list	*list;
 	char	*line;
 	t_list	*el;
 
 	list = NULL;
-	line = data->first_line;
+	line = game->first_line;
 	while (line != NULL)
 	{
 		el = ft_lstnew(line);
@@ -59,7 +59,7 @@ t_list	*get_lines(int fd, t_data *data)
 	return (list);
 }
 
-void	make_map(t_list *list, t_data *data)
+void	make_map(t_list *list, t_game *game)
 {
 	char	**tmp4;
 	char	**tmp3;
@@ -67,25 +67,25 @@ void	make_map(t_list *list, t_data *data)
 	tmp4 = ft_lsttoarr(list);
 	tmp3 = ft_remove_new_line(tmp4);
 	printarr(tmp3);
-	data->map = tmp3;
+	game->map = tmp3;
 	ft_freearray((void **)tmp4);
 	ft_lstclear(&list, free);
 }
 
-void	read_map(char *str, t_data *data)
+void	read_map(char *str, t_game *game)
 {
 	int		fd;
 	char	*line;
 	char	*meta_data;
 	char	**x;
 
-	data->first_line = NULL;
+	game->first_line = NULL;
 	fd = open_file(str);
 	line = read_first_line(fd);
 	line = remove_empty_lines(line, fd);
-	meta_data = read_meta_data(fd, data);
+	meta_data = get_file_data(fd, game);
 	x = ft_split(meta_data, '\n');
-	data->data = roted_array(x);
+	game->game = rotate_arr(x);
 	free(meta_data);
-	make_map(get_lines(fd, data), data);
+	make_map(get_lines(fd, game), game);
 }

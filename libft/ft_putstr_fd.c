@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 16:01:04 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/01/27 08:17:30 by abin-saa         ###   ########.fr       */
+/*   Created: 2021/12/31 12:40:26 by mraspors          #+#    #+#             */
+/*   Updated: 2021/12/31 12:40:26 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 void	ft_putstr_fd(char *s, int fd)
@@ -17,12 +16,12 @@ void	ft_putstr_fd(char *s, int fd)
 	int	i;
 
 	i = 0;
-	if (!s)
-		return ;
-	while (*s)
+	if (s != NULL)
 	{
-		i = write(fd, s, 1);
-		s++;
+		while (s[i] != '\0')
+		{
+			write(fd, &s[i], 1);
+			i++;
+		}
 	}
-	i += 1;
 }

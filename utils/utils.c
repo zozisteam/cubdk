@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/30 07:50:23 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:38:55 by alalmazr         ###   ########.fr       */
+/*   Created: 2023/02/13 16:58:12 by mraspors          #+#    #+#             */
+/*   Updated: 2023/02/15 16:59:22 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 char	**ft_lsttoarr(t_list *list)
 {
@@ -29,7 +29,7 @@ char	**ft_lsttoarr(t_list *list)
 	return (arr);
 }
 
-char	**ft_copyarr(char **arr)
+char	**cpy_arr(char **arr)
 {
 	char	**copy;
 	int		len;
@@ -67,7 +67,7 @@ char	*listtostr(t_list *arr)
 	return (str);
 }
 
-void	ft_error(void)
+void	error_(void)
 {
 	printf("Error	:	Invalid map");
 	exit(1);

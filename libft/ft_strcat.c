@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 10:50:55 by abin-saa          #+#    #+#             */
-/*   Updated: 2022/06/07 12:24:49 by abin-saa         ###   ########.fr       */
+/*   Created: 2022/07/23 14:16:02 by mraspors          #+#    #+#             */
+/*   Updated: 2022/07/23 15:50:38 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-void	ft_putstr(const char *s)
+char	*ft_strcat(char *dest, char *src)
 {
-	if (!s)
-		ft_putstr("(null)");
-	else
+	int	i;
+	int	j;
+
+	i = 0;
+	while (dest[i] != '\0')
+		i++;
+	j = 0;
+	while (src[j] != '\0')
 	{
-		while (*s)
-		{
-			write(1, s, 1);
-			s++;
-		}
+		dest[i + j] = src[j];
+		j++;
 	}
+	dest[i + j] = '\0';
+	return (dest);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 10:00:55 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:38:55 by alalmazr         ###   ########.fr       */
+/*   Created: 2023/02/13 16:58:18 by mraspors          #+#    #+#             */
+/*   Updated: 2023/02/13 16:58:20 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	arr_2d_len(void **arr)
 {

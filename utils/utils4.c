@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abin-saa <abin-saa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 13:29:29 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/04 10:02:58 by abin-saa         ###   ########.fr       */
+/*   Created: 2023/02/13 16:58:29 by mraspors          #+#    #+#             */
+/*   Updated: 2023/02/15 17:05:04 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-int	f_lline(t_data *data)
+int	max_line_len(t_game *data)
 {
 	int		row;
 	int		col;
@@ -40,7 +40,7 @@ int	f_lline(t_data *data)
 	return (longest);
 }
 
-void	draw_map(t_data *data)
+void	draw_map(t_game *data)
 {
 	int		row;
 	int		col;
@@ -60,15 +60,15 @@ void	draw_map(t_data *data)
 		while (line[col] != '\0')
 		{
 			if (line[col] && line[col] == '1')
-				white_box(data, (col - skip)
-					* data->size, row * data->size, 0x00FFF000);
+				minimap_walls(data, (col - skip)
+					* data->size, row * data->size, 0x00ffbff4);
 			col++;
 		}
 		row++;
 	}
 }
 
-void	draw_line(t_data *game)
+void	draw_line(t_game *game)
 {
 	float	step;
 	float	x;
@@ -95,13 +95,12 @@ void	draw_line(t_data *game)
 	}
 }
 
-void	minimap(t_data *data)
+void	minimap(t_game *data)
 {
 	double	p2x;
 	double	p2y;
 
 	draw_map(data);
-
 	p2x = data->posx
 		- (cos(data->player_dir) * 1);
 	p2y = data->posy
@@ -109,9 +108,9 @@ void	minimap(t_data *data)
 	data->var1 = data->posx * data->size;
 	data->var2 = data->posy * data->size;
 	data->var3 = p2x * data->size;
-	data->var4 = ft_max(1, p2y * data->size);
+	data->var4 = max_(1, p2y * data->size);
 	draw_line(data);
-	white_box(data, data->posx * data->size,
+	minimap_player(data, data->posx * data->size,
 		data->posy * data->size, 0x00FF0000);
 	mlx_put_image_to_window(data->mlx, data->win, data->img_minimap, 0, 0);
 }
@@ -120,11 +119,11 @@ int	first_space(char **line)
 {
 	int	i;
 	int	j;
-	int	s_hort;
+	int	max_spaces;
 
 	i = 0;
 	j = 0;
-	s_hort = 2147483647;
+	max_spaces = 2147483647;
 	while (line[i] != NULL)
 	{
 		j = 0;
@@ -132,9 +131,9 @@ int	first_space(char **line)
 		{
 			j++;
 		}
-		if (j < s_hort)
-			s_hort = j;
+		if (j < max_spaces)
+			max_spaces = j;
 		i++;
 	}
-	return (s_hort);
+	return (max_spaces);
 }

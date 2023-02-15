@@ -5,126 +5,131 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/01 07:01:22 by abin-saa          #+#    #+#             */
-/*   Updated: 2023/02/10 08:40:34 by alalmazr         ###   ########.fr       */
+/*   Created: 2023/02/13 16:58:53 by mraspors          #+#    #+#             */
+/*   Updated: 2023/02/15 17:18:29 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	check_error(t_data *img)
+int	check_error(t_game *game)
 {
-	fill_data(img);
-	if (check(img->data) == 0)
-		ft_error();
-	if (fill_color(img) == 0)
-		ft_error();
-	if (check_color_range(img) == 0)
-		ft_error();
-	if (exist_image(img) == 0)
-		ft_error();
-	if (chek_imgs(img) == 0)
-		ft_error();
-	if (invalid_map(img->map) == 0)
-		ft_error();
-	if (cheack_if_dirc(img->map) == 0)
-		ft_error();
-	if (check_zeros(img) == 0)
-		ft_error();
-	if (check_close_map(img->map) == 0)
-		ft_error();
+	fill_data(game);
+	if (check(game->data) == 0)
+		error_();
+	if (fill_color(game) == 0)
+		error_();
+	if (check_color_range(game) == 0)
+		error_();
+	if (exist_image(game) == 0)
+		error_();
+	if (chek_imgs(game) == 0)
+		error_();
+	if (invalid_map(game->map) == 0)
+		error_();
+	if (check_dir(game->map) == 0)
+		error_();
+	if (check_zeros(game) == 0)
+		error_();
+	if (check_close_map(game->map) == 0)
+		error_();
 	return (1);
 }
 
-void	init(t_data	*img)
+void	init(t_game	*game)
 {
 	int	max_size;
 	int	with;
 	int	size;
 	int	skip;
 
-	img->mlx = mlx_init();
-	max_size = f_lline(img);
-	with = arr_2d_len((void **)img->map);
-	size = 900 / (max_size + with);
-	skip = first_space(img->map);
-	img->img_minimap = mlx_new_image(img->mlx, size
+	game->mlx = mlx_init();
+	max_size = max_line_len(game);
+	with = arr_2d_len((void **)game->map);
+	size = 500 / (max_size + with);
+	skip = first_space(game->map);
+	game->img_minimap = mlx_new_image(game->mlx, size
 			* (max_size - skip), with * size);
-	img->minimap_addr = mlx_get_data_addr(img->img_minimap,
-			&img->bpp_line, &img->size_line, &img->endian);
-	img->s = roted_array(img->map);
-	img->win = mlx_new_window(img->mlx,
-			SCREENWIDTH, SCREENHEIGHT, "Hello world!");
-	img->img = mlx_new_image(img->mlx, SCREENWIDTH, SCREENHEIGHT);
-	img->img_alpha = mlx_new_image(img->mlx, SCREENWIDTH, SCREENHEIGHT);
-	img->addr = mlx_get_data_addr(img->img,
-			&img->bits_per_pixel, &img->line_length, &img->endian);
-	img->addr_alpha = mlx_get_data_addr(img->img_alpha,
-			&img->bits_per_pixel, &img->line_length, &img->endian);
-	draw_player(img);
+	game->minimap_addr = mlx_get_data_addr(game->img_minimap,
+			&game->bpp_line, &game->size_line, &game->endian);
+	game->s = rotate_arr(game->map);
+	game->win = mlx_new_window(game->mlx,
+			SCREENWIDTH, SCREENHEIGHT, "game for ***s");
+	game->game = mlx_new_image(game->mlx, SCREENWIDTH, SCREENHEIGHT);
+	game->img_alpha = mlx_new_image(game->mlx, SCREENWIDTH, SCREENHEIGHT);
+	game->addr = mlx_get_data_addr(game->game,
+			&game->bits_per_pixel, &game->line_length, &game->endian);
+	game->addr_alpha = mlx_get_data_addr(game->img_alpha,
+			&game->bits_per_pixel, &game->line_length, &game->endian);
+	draw_player(game);
 }
 
-void	ftset_player_dir(t_data *img, int j, int k)
+void	ftset_player_dir(t_game *game, int j, int k)
 {
-	if (img->s[j][k] == 'S')
+	if (game->s[j][k] == 'S')
 	{
-		img->dirX = 1;
-		img->planeY = -0.66;
+		game->dir_x = 1;
+		game->plane_y = -0.66;
 	}
-	else if (img->s[j][k] == 'E')
+	else if (game->s[j][k] == 'E')
 	{
-		img->dirY = 1;
-		img->planeX = 0.66;
+		game->dir_y = 1;
+		game->plane_x = 0.66;
 	}
-	else if (img->s[j][k] == 'W')
+	else if (game->s[j][k] == 'W')
 	{
-		img->dirY = -1;
-		img->planeX = -0.66;
+		game->dir_y = -1;
+		game->plane_x = -0.66;
 	}
 	else
 	{
-		img->dirX = -1;
-		img->planeY = 0.66;
+		game->dir_x = -1;
+		game->plane_y = 0.66;
 	}
 }
 
-void	set_pos(t_data *img)
+void	set_pos_helper(t_game *game, int j, int k)
+{
+	if (game->s[j][k] == 'S')
+	{
+		game->dir_x = 1;
+		game->plane_y = -0.66;
+	}
+	else if (game->s[j][k] == 'E')
+	{
+		game->dir_y = 1;
+		game->plane_x = 0.66;
+	}
+	else if (game->s[j][k] == 'W')
+	{
+		game->dir_y = -1;
+		game->plane_x = -0.66;
+	}
+	else
+	{
+		game->dir_x = -1;
+		game->plane_y = 0.66;
+	}
+}
+
+void	set_pos(t_game *game)
 {
 	int	j;
 	int	k;
 
 	j = 0;
 	k = 0;
-	while (img->s[j])
+	while (game->s[j])
 	{
 		k = 0;
-		while (img->s[j][k])
+		while (game->s[j][k])
 		{
-			if (img->s[j][k] == 'W' || img->s[j][k] == 'N'
-			|| img->s[j][k] == 'S' || img->s[j][k] == 'E')
+			if (game->s[j][k] == 'W' || game->s[j][k] == 'N'
+			|| game->s[j][k] == 'S' || game->s[j][k] == 'E')
 			{
-				img->posX = j + 0.5;
-				img->posY = k + 0.5;
-				if (img->s[j][k] == 'S')
-				{
-					img->dirX = 1;
-					img->planeY = -0.66;
-				}
-				else if (img->s[j][k] == 'E')
-				{
-					img->dirY = 1;
-					img->planeX = 0.66;
-				}
-				else if (img->s[j][k] == 'W')
-				{
-					img->dirY = -1;
-					img->planeX = -0.66;
-				}
-				else
-				{
-					img->dirX = -1;
-					img->planeY = 0.66;
-				}
+				game->pos_x = j + 0.5;
+				game->pos_y = k + 0.5;
+				set_pos_helper(game, j, k);
 				break ;
 			}
 			k++;

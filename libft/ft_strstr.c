@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/31 12:40:18 by mraspors          #+#    #+#             */
-/*   Updated: 2021/12/31 12:40:18 by mraspors         ###   ########.fr       */
+/*   Created: 2022/07/23 14:22:55 by mraspors          #+#    #+#             */
+/*   Updated: 2022/07/23 15:50:02 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+char	*ft_strstr(char *str, char *to_find)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	if (s != NULL)
+	if (to_find[0] == '\0')
+		return (str);
+	while (str[i] != '\0')
 	{
-		while (s[i] != '\0')
+		j = 0;
+		while (str[i + j] != '\0' && str[i + j] == to_find[j])
 		{
-			write(fd, &s[i], 1);
-			i++;
+			if (to_find[j + 1] == '\0')
+				return (&str[i]);
+			++j;
 		}
+		++i;
 	}
-	write(fd, "\n", 1);
+	return (0);
 }

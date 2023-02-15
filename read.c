@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:56:35 by mraspors          #+#    #+#             */
-/*   Updated: 2023/02/15 17:18:38 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/15 23:22:29 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,3 +89,26 @@ void	read_map(char *str, t_game *game)
 	free(meta_data);
 	make_map(get_lines(fd, game), game);
 }
+
+// void	read_map(char *str, t_game *game)
+// {
+// 	int		fd;
+// 	char	*next_line;
+// 	char	*s;
+
+// 	s = NULL;
+// 	fd = open(str, O_RDONLY);
+// 	next_line = get_next_line(fd);
+// 	while (next_line)
+// 	{
+// 		s = ft_strjoin_gnl(s, next_line);
+// 		free(next_line);
+// 		next_line = get_next_line(fd);
+// 	}
+// 	game->data = ft_split(s, '\n');
+// 	for (int i = 0; game->data[i] != NULL; i++)
+// 		printf("%s\n", game->data[i]);
+// 	free(s);
+// 	free(next_line);
+// 	close(fd);
+// }

@@ -6,25 +6,25 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:58:58 by mraspors          #+#    #+#             */
-/*   Updated: 2023/02/15 17:14:12 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/15 22:43:07 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	check_color_range(t_game *game)
+int	check_color_range(t_game *data)
 {
-	if (game->f_color.r > 255 || game->f_color.r < 0)
+	if (data->f_color.r > 255 || data->f_color.r < 0)
 		return (0);
-	if (game->f_color.g > 255 || game->f_color.g < 0)
+	if (data->f_color.g > 255 || data->f_color.g < 0)
 		return (0);
-	if (game->f_color.b > 255 || game->f_color.b < 0)
+	if (data->f_color.b > 255 || data->f_color.b < 0)
 		return (0);
-	if (game->c_color.r > 255 || game->c_color.r < 0)
+	if (data->c_color.r > 255 || data->c_color.r < 0)
 		return (0);
-	if (game->c_color.g > 255 || game->c_color.g < 0)
+	if (data->c_color.g > 255 || data->c_color.g < 0)
 		return (0);
-	if (game->c_color.b > 255 || game->c_color.b < 0)
+	if (data->c_color.b > 255 || data->c_color.b < 0)
 		return (0);
 	return (1);
 }
@@ -40,15 +40,15 @@ int	invalid_img(char *str)
 	return (1);
 }
 
-int	exist_image(t_game *game)
+int	exist_image(t_game *data)
 {
-	if (check_img_exist(game->_ea) == 0)
+	if (check_img_exist(data->_ea) == 0)
 		return (0);
-	if (check_img_exist(game->_so) == 0)
+	if (check_img_exist(data->_so) == 0)
 		return (0);
-	if (check_img_exist(game->_we) == 0)
+	if (check_img_exist(data->_we) == 0)
 		return (0);
-	if (check_img_exist(game->_no) == 0)
+	if (check_img_exist(data->_no) == 0)
 		return (0);
 	return (1);
 }
@@ -64,11 +64,11 @@ int	check_img_exist(char *str)
 	return (1);
 }
 
-int	check(char **game)
+int	check(char **data)
 {
 	int	i;
 
-	i = arr_2d_len((void **)game);
+	i = arr_2d_len((void **)data);
 	if (i != 6)
 		return (0);
 	return (1);

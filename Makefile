@@ -23,7 +23,7 @@ APPKIT = -framework AppKit
 #------------------------------------------------------------------------------
 MLX_FLAGS = $(MLX) $(APPKIT)
 
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 
 sanitize = -fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls
 

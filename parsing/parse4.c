@@ -6,32 +6,32 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:59:03 by mraspors          #+#    #+#             */
-/*   Updated: 2023/02/15 17:15:25 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/15 22:59:23 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	check_color3(t_game *game, int *n, int *j)
+void	check_color3(t_game *data, int *n, int *j)
 {
 	int	i;
 	int	k;
 
 	i = *j;
 	k = *n;
-	if (game->data[i][k] == 'F')
+	if (data->data[i][k] == 'F')
 	{
 		k += 2;
-		while (game->data[i][k] == ' ' || game->data[i][k] == '\t')
+		while (data->data[i][k] == ' ' || data->data[i][k] == '\t')
 			k++;
-		game->f_color.f = ft_strdup(game->data[i] + k);
+		data->f_color.f = ft_strdup(data->data[i] + k);
 	}
-	if (game->data[i][k] == 'C')
+	if (data->data[i][k] == 'C')
 	{
 		k += 2;
-		while (game->data[i][k] == ' ' || game->data[i][k] == '\t')
+		while (data->data[i][k] == ' ' || data->data[i][k] == '\t')
 			k++;
-		game->c_color.c = ft_strdup(game->data[i] + k);
+		data->c_color.c = ft_strdup(data->data[i] + k);
 	}
 }
 

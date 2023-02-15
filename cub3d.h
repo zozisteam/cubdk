@@ -6,7 +6,7 @@
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:57:55 by mraspors          #+#    #+#             */
-/*   Updated: 2023/02/15 17:07:01 by alalmazr         ###   ########.fr       */
+/*   Updated: 2023/02/15 22:47:53 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,8 +179,8 @@ int		check_zeros(t_game *data);
 int		check_dir(char **map);
 int		check_close_map(char **map);
 int		make_color(int t, int r, int g, int b);
-int		check_error(t_game *game);
-void	init(t_game	*game);
+int		check_error(t_game *img);
+void	init(t_game	*img);
 void	set_pos(t_game *game);
 int		check_char(char c);
 int		check_color(t_game *data, int *k, int *i);
@@ -197,7 +197,6 @@ char	*read_first_line(int fd);
 char	*remove_empty_lines(char *line, int fd);
 t_list	*get_lines(int fd, t_game *data);
 void	make_map(t_list *list, t_game *data);
-void	read_map(char *str, t_game *data);
 int		open_file(char *str);
 char	*get_file_data(int fd, t_game *data);
 void	minimap_player(t_game *game, int x, int y, int color);

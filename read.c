@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 16:56:35 by mraspors          #+#    #+#             */
-/*   Updated: 2023/02/15 23:22:29 by alalmazr         ###   ########.fr       */
+/*   Created: 2023/02/16 13:53:55 by alalmazr          #+#    #+#             */
+/*   Updated: 2023/02/16 13:54:04 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*read_first_line(int fd)
 
 	line = get_next_line(fd);
 	if (line == NULL)
-		error_();
+		ft_error();
 	free_line = line;
 	line = ft_strtrim(free_line, " \t");
 	free(free_line);
@@ -40,7 +40,7 @@ char	*remove_empty_lines(char *line, int fd)
 	return (line);
 }
 
-t_list	*get_lines(int fd, t_game *game)
+t_list	*get_lines(int fd, t_data *game)
 {
 	t_list	*list;
 	char	*line;
@@ -59,20 +59,20 @@ t_list	*get_lines(int fd, t_game *game)
 	return (list);
 }
 
-void	make_map(t_list *list, t_game *game)
+void	make_map(t_list *list, t_data *game)
 {
 	char	**tmp4;
 	char	**tmp3;
 
-	tmp4 = ft_lsttoarr(list);
+	tmp4 = lst_2_arr(list);
 	tmp3 = ft_remove_new_line(tmp4);
-	printarr(tmp3);
+	print_arr(tmp3);
 	game->map = tmp3;
-	ft_freearray((void **)tmp4);
+	free_arr((void **)tmp4);
 	ft_lstclear(&list, free);
 }
 
-void	read_map(char *str, t_game *game)
+void	read_map(char *str, t_data *game)
 {
 	int		fd;
 	char	*line;
@@ -83,32 +83,9 @@ void	read_map(char *str, t_game *game)
 	fd = open_file(str);
 	line = read_first_line(fd);
 	line = remove_empty_lines(line, fd);
-	meta_data = get_file_data(fd, game);
+	meta_data = read_meta_data(fd, game, line);
 	x = ft_split(meta_data, '\n');
-	game->game = rotate_arr(x);
+	game->data = rotate_arr(x);
 	free(meta_data);
 	make_map(get_lines(fd, game), game);
 }
-
-// void	read_map(char *str, t_game *game)
-// {
-// 	int		fd;
-// 	char	*next_line;
-// 	char	*s;
-
-// 	s = NULL;
-// 	fd = open(str, O_RDONLY);
-// 	next_line = get_next_line(fd);
-// 	while (next_line)
-// 	{
-// 		s = ft_strjoin_gnl(s, next_line);
-// 		free(next_line);
-// 		next_line = get_next_line(fd);
-// 	}
-// 	game->data = ft_split(s, '\n');
-// 	for (int i = 0; game->data[i] != NULL; i++)
-// 		printf("%s\n", game->data[i]);
-// 	free(s);
-// 	free(next_line);
-// 	close(fd);
-// }

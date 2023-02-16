@@ -3,21 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/21 00:42:13 by mraspors          #+#    #+#             */
-/*   Updated: 2021/12/21 00:42:14 by mraspors         ###   ########.fr       */
+/*   Created: 2022/05/11 11:05:52 by alalmazr          #+#    #+#             */
+/*   Updated: 2023/02/16 13:54:26 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
-	char	*c;
+	char	*str;
 	size_t	i;
 
+	str = (char *)s;
 	i = 0;
-	c = s;
-	while (i != n)
-		c[i++] = '\0';
+	while (i < n)
+	{
+		str[i] = 0;
+		i++;
+	}
 }
+
+/*int main()
+{
+
+    char bytes[5] = {1, 'j', 3,4,'x'};
+    ft_bzero(bytes, 5);
+    int i = 0;
+    while (i < 5)
+    {
+        printf("%d, ", bytes[i]);
+        i++;
+
+    }
+    return (0);
+}
+*/

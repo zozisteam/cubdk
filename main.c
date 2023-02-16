@@ -5,21 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 16:57:39 by mraspors          #+#    #+#             */
-/*   Updated: 2023/02/15 22:51:57 by alalmazr         ###   ########.fr       */
+/*   Created: 2023/02/02 12:30:56 by alalmazr          #+#    #+#             */
+/*   Updated: 2023/02/16 13:55:05 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_player_helper(t_game *game, int i, int j, int skip)
+void	draw_player_helper(t_data *game, int i, int j, int skip)
 {
 	game->posx = j - skip + 0.5;
 	game->posy = i + 0.5;
 	if (game->map[i][j] == 'S')
 		game->player_dir = M_PI / 2;
 	else if (game->map[i][j] == 'N')
-		game->player_dir = 3 / 2.0 * M_PI;
+		game->player_dir = (3 * M_PI) / 2.0 ;
 	else if (game->map[i][j] == 'W')
 		game->player_dir = 2 * M_PI;
 	else if (game->map[i][j] == 'E')
@@ -27,81 +27,48 @@ void	draw_player_helper(t_game *game, int i, int j, int skip)
 	game->map[i][j] = '0';
 }
 
-void	ft_set_player_dir(t_game *game, int j, int k)
+void	init2(t_data *game)
 {
-	if (game->s[j][k] == 'S')
-	{
-		game->dir_x = 1;
-		game->plane_y = -0.66;
-	}
-	else if (game->s[j][k] == 'E')
-	{
-		game->dir_y = 1;
-		game->plane_x = 0.66;
-	}
-	else if (game->s[j][k] == 'W')
-	{
-		game->dir_y = -1;
-		game->plane_x = -0.66;
-	}
-	else
-	{
-		game->dir_x = -1;
-		game->plane_y = 0.66;
-	}
-}
+	int		max_size;
+	int		with;
 
-void	ft_put_player(t_game *game)
-{
-	int	j;
-	int	k;
-
-	j = 0;
-	k = 0;
-	while (game->s[j])
-	{
-		k = 0;
-		while (game->s[j][k])
-		{
-			if (game->s[j][k] == 'W' || game->s[j][k] == 'N'
-				|| game->s[j][k] == 'S' || game->s[j][k] == 'E')
-			{
-				game->posx = j + 0.5;
-				game->posy = k + 0.5;
-				ft_set_player_dir(game, j, k);
-				break ;
-			}
-			k++;
-		}
-		j++;
-	}
+	max_size = f_lline(game);
+	with = arr_2d_len((void **)game->map);
+	game->size = 500 / ((max_size - first_space(game->map)) + with);
+	game->frame = 0;
+	game->pos_x = game->posx;
+	game->pos_y = game->posy;
+	game->drawstart = 0;
+	game->drawend = 0;
+	game->planex = 0;
+	game->planey = 0;
+	game->dirx = 0;
+	game->diry = 0;
 }
 
 int	main(int ac, char **av)
 {
-	t_game	game;
-	int		max_size;
-	int		with;
+	t_data	img;
 
 	if (ac != 2)
-		exit(1);
-	read_map(av[1], &game);
-	check_error(&game);
-	max_size = max_line_len(&game);
-	with = arr_2d_len((void **)game.map);
-	init(&game);
-	game.size = 500 / (max_size + with);
-	game.frame = 0;
-	game.pos_x = game.posx;
-	game.pos_y = game.posy;
-	set_pos(&game);
-	game.draw_start = 0;
-	game.draw_end = 0;
-	create_img1(&game);
-	minimap(&game);
-	raycast(&game);
-	mlx_hook(game.win, 2, 0, key_event, &game);
-	mlx_hook(game.win, 6, 1L << 6, mouse, &game);
-	mlx_loop_hook(game.mlx, &frame_counter, &game);
-	mlx_loop(game.mlx);
+	{
+		printf("Error");
+		return (0);
+	}
+	check_name(av[1]);
+	read_map(av[1], &img);
+	// img.walkspeed = 0.1;
+	print_arr(img.data);
+	check_err(&img);
+	init(&img);
+	init2(&img);
+	set_pos(&img);
+	create_img1(&img);
+	minimap(&img);
+	raycast(&img);
+	mlx_hook(img.win, 2, 0, key_event, &img);
+	mlx_hook(img.win, 6, 1L << 6, mouse, &img);
+	// mlx_mouse_hook(img.win, mouse_hook, &img);
+	// mlx_loop_hook(img.mlx, &frame_conter, &img);
+	mlx_loop(img.mlx);
 }

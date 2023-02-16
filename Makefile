@@ -1,49 +1,41 @@
 NAME = cub3d
 
-FILES =	main.c cub.c keyevent.c utils/utils.c parsing/parse.c\
-		parsing/parse2.c parsing/parse3.c parsing/parse4.c parsing/parse5.c\
-		parsing/parse6.c utils/utils2.c utils/utils3.c utils/utils4.c utils/utils5.c\
-		utils/utlils6.c events.c read.c move_dowun.c\
-		raycast1.c raycast2.c
+SRC = cub.c main.c keyevent.c utils.c parse.c parse2.c parse3.c parse4.c parse5.c utils2.c utils3.c utils4.c utils5.c utlils6.c events.c parse6.c read.c move_dowun.c read2.c raycast2.c raycast.c
 
-HEADERS = ./cub3d.h\
-		  ./libft/libft.h\
+LIBFT = libft/libft.a
+PRINTF = ft_printf/libftprintf.a
+MLX = mlx/libmlx.a
 
-ARCS = ./libft/libft.a
+OBJ = $(SRC:.c=.o)
 
-OBJ = $(FILES:.c=.o)
+CC = gcc -g3 -O3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
-#------------------------------------------------------------------------------
-OPENGL_PATH = ./mlx/
 
-MLX = $(OPENGL_PATH)libmlx.a -framework OpenGL
+all: $(NAME)
 
-APPKIT = -framework AppKit
+$(NAME): $(OBJ) $(LIBFT) $(PRINTF) $(MLX)
+	$(CC) $(CFLAGS) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -Llibft -lft ft_printf/libftprintf.a  -o cub3d
 
-#------------------------------------------------------------------------------
-MLX_FLAGS = $(MLX) $(APPKIT)
 
-FLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+$(LIBFT):
+	@make bonus -C ./libft
 
-sanitize = -fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls
+$(PRINTF):
+	@make -C ./ft_printf
 
-CC = gcc
-
-all: $(NAME) clean
-$(NAME): $(OBJ)
+$(MLX): 
 	@make -C ./mlx
-	@make -C ./libft
-	@$(CC) $(FILES) $(FLAGS) $(MLX_FLAGS) -Ofast -O3 $(ARCS) -o cub3d
+	cp $(MLX) .
 
 clean:
-	@rm -rf $(OBJ)
-	@make -C ./libft clean
-
+	rm -f $(OBJ)
+	make clean -C libft
+	make clean -C ft_printf
 
 fclean: clean
-	@make -C ./mlx clean
-	@make -C ./libft fclean
-	@rm -rf cub3d
+	rm -f $(NAME)
+	make fclean -C libft
+	make fclean -C ft_printf
 
-
-re: fclean all
+ re: fclean all

@@ -3,33 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/22 08:07:10 by mraspors          #+#    #+#             */
-/*   Updated: 2021/12/22 08:07:11 by mraspors         ###   ########.fr       */
+/*   Created: 2022/05/17 15:55:11 by alalmazr          #+#    #+#             */
+/*   Updated: 2023/02/16 13:54:26 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-char	*ft_strnstr(const char	*big, const char *little, size_t len)
+char	*ft_strnstr(const char *h, const char *n, size_t len)
 {
-	size_t	i;
-	size_t	j;
+	size_t	a;
+	size_t	b;
+	char	*m;
 
-	i = 0;
-	j = 0;
-	if (*little == '\0' || little == NULL)
-		return ((char *)big);
-	if (ft_strlen(big) < ft_strlen(little))
-		return (NULL);
-	while (big[i] != '\0' && i < len)
+	m = (char *)h;
+	a = 0;
+	if (!*n)
+		return ((char *)h);
+	while (h[a] != '\0' && a < len)
 	{
-		j = 0;
-		while (big[i + j] == little[j] && i + j < len && little[j] != '\0')
-			j++;
-		if (j == len || little[j] == '\0')
-			return ((char *)&big[i]);
-		i++;
+		b = 0;
+		while (h[a + b] == n[b] && n[b] != '\0' && a + b < len)
+		{
+			b++;
+		}
+		if (b == ft_strlen(n))
+			return (&m[a]);
+		a++;
 	}
 	return (NULL);
 }

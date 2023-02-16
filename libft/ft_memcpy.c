@@ -3,25 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/21 01:22:56 by mraspors          #+#    #+#             */
-/*   Updated: 2022/01/27 06:55:04 by mraspors         ###   ########.fr       */
+/*   Created: 2022/05/17 11:23:28 by alalmazr          #+#    #+#             */
+/*   Updated: 2023/02/16 13:54:26 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void	*dst, const void	*src, size_t n)
 {
+	char	*dst_bytes;
+	char	*src_bytes;
 	size_t	i;
 
 	i = 0;
-	if (dest == 0 && src == 0)
-		return (NULL);
+	dst_bytes = (char *)dst;
+	src_bytes = (char *)src;
+	if (dst == src)
+		return (dst);
 	while (i < n)
 	{
-		((char *)dest)[i] = ((char *)src)[i];
+		dst_bytes[i] = src_bytes[i];
 		i++;
 	}
-	return (dest);
+	return (dst);
 }
+
+// 	int main() 
+// {
+//     char m[4] = "sde";
+//     char n[4];
+//     ft_memcpy(n, m, 4);
+//     printf("n: %s\n", n);
+
+// }

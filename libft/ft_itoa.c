@@ -3,70 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/31 12:39:58 by mraspors          #+#    #+#             */
-/*   Updated: 2021/12/31 12:39:58 by mraspors         ###   ########.fr       */
+/*   Created: 2022/05/19 15:44:00 by alalmazr          #+#    #+#             */
+/*   Updated: 2023/02/16 13:54:26 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-int	ft_len(int n)
+static int	countdigt(int n)
 {
-	int	len;
-	int	nb;
+	int	i;
 
-	len = 0;
-	nb = n;
+	i = 0;
 	if (n == 0)
 		return (1);
-	if (n == -2147483648)
-		return (10);
-	if (nb < 0)
-		nb *= -1;
-	while (nb > 0)
+	while (n)
 	{
-		nb /= 10;
-		len++;
+		i++;
+		n = n / 10;
 	}
-	return (len);
-}
-
-char	helper(int n, int nb)
-{
-	char	result;
-
-	if (n < 0)
-		result = ((nb % 10) * -1) + '0';
-	else
-		result = nb % 10 + '0';
-	return (result);
+	return (i);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*str_n;
-	int		nb;
-	int		n_len;
+	unsigned int	number;
+	char			*str;
+	size_t			len;
 
-	nb = n;
-	n_len = ft_len(nb);
+	len = countdigt(n);
+	number = n;
 	if (n < 0)
-		n_len++;
-	str_n = (char *)malloc(sizeof(char) * (n_len + 1));
-	if (!str_n)
-		return (NULL);
-	str_n[n_len--] = '\0';
-	while (n_len >= 0)
 	{
-		if (n < 0 && n_len == 0)
-		{
-			str_n[0] = '-';
-			break ;
-		}
-		str_n[n_len] = helper(n, nb);
-		nb /= 10;
-		n_len--;
+		number = -1 * n;
+		len++;
 	}
-	return (str_n);
+	str = malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
+		return (NULL);
+	str[len] = '\0';
+	if (number == 0)
+		str[--len] = '0';
+	while (number)
+	{
+		str[--len] = number % 10 + '0';
+		number = number / 10;
+	}
+	if (n < 0)
+		str[0] = '-';
+	return (str);
 }
+// #include <stido.h
+// int	main()
+// {
+// 	char * str = ft_itoa(0);
+// 	printf("%s", str);
+// }

@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 16:57:50 by mraspors          #+#    #+#             */
-/*   Updated: 2023/02/15 17:07:17 by alalmazr         ###   ########.fr       */
+/*   Created: 2023/02/02 16:37:10 by alalmazr          #+#    #+#             */
+/*   Updated: 2023/02/16 13:54:26 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	key_check_rightleft(int keycode, t_game *game)
+void	key_check_rightleft(int keycode, t_data *game)
 {	
 	double	nextp_x;
 	double	nextp_y;
@@ -27,41 +27,52 @@ void	key_check_rightleft(int keycode, t_game *game)
 		move_down(game, nextp_x, nextp_y, skip);
 }
 
-void	key_rotate_event(int keycode, t_game *game)
+void	key_check_rotate(int keycode, t_data *game)
 {
+	double	olddirx;
+	double	oldplanex;
+
 	if (keycode == 124)
 	{
-		game->olddir = game->dir_x;
-		game->dir_x = game->dir_x * cos(-ROTSPEED) - game->dir_y * sin(-ROTSPEED);
-		game->dir_y = game->olddir * sin(-ROTSPEED) + game->dir_y * cos(-ROTSPEED);
-		game->oldplane = game->plane_x;
-		game->plane_x = game->plane_x
-			* cos(-ROTSPEED) - game->plane_y * sin(-ROTSPEED);
-		game->plane_y = game->oldplane * sin(-ROTSPEED)
-			+ game->plane_y * cos(-ROTSPEED);
+		olddirx = game->dirx;
+		game->dirx = game->dirx * cos(-ROTSPEED) - game->diry * sin(-ROTSPEED);
+		game->diry = olddirx * sin(-ROTSPEED) + game->diry * cos(-ROTSPEED);
+		oldplanex = game->planex;
+		game->planex = game->planex
+			* cos(-ROTSPEED) - game->planey * sin(-ROTSPEED);
+		game->planey = oldplanex * sin(-ROTSPEED) + game->planey * cos(-ROTSPEED);
 		game->player_dir -= ROTSPEED;
 	}
 	else if (keycode == 123)
 	{
-		game->olddir = game->dir_x;
-		game->dir_x = game->dir_x * cos(ROTSPEED) - game->dir_y * sin(ROTSPEED);
-		game->dir_y = game->olddir * sin(ROTSPEED) + game->dir_y * cos(ROTSPEED);
-		game->oldplane = game->plane_x;
-		game->plane_x = game->plane_x * cos(ROTSPEED)
-			- game->plane_y * sin(ROTSPEED);
-		game->plane_y = game->oldplane * sin(ROTSPEED)
-			+ game->plane_y * cos(ROTSPEED);
+		olddirx = game->dirx;
+		game->dirx = game->dirx * cos(ROTSPEED) - game->diry * sin(ROTSPEED);
+		game->diry = olddirx * sin(ROTSPEED) + game->diry * cos(ROTSPEED);
+		oldplanex = game->planex;
+		game->planex = game->planex * cos(ROTSPEED) - game->planey * sin(ROTSPEED);
+		game->planey = oldplanex * sin(ROTSPEED) + game->planey * cos(ROTSPEED);
 				game->player_dir += ROTSPEED;
 	}
 }
 
-int	key_event(int keycode, t_game *game)
+int	key_event(int keycode, t_data *game)
 {
+
 	key_check_updown(keycode, game);
 	key_check_rightleft(keycode, game);
-	key_rotate_event(keycode, game);
+	key_check_rotate(keycode, game);
 	if (keycode == 53)
+	{
 		exit(1);
+	}
+	// if (keycode == 3)
+	// {
+	// 	draw_big_map(game);
+	// 	mlx_put_image_to_window(game->mlx, game->win, game->bag_map, 0, 0);
+	// 	sleep(3);
+	// 	// return (0);
+	// }
+	change_speed(keycode, game);
 	raycast (game);
 	return (0);
 }

@@ -116,10 +116,10 @@ int	mipng_fill_img(mlx_img_list_t *img, unsigned char *buf, png_info_t *pi)
   unsigned char tmp;
   unsigned char *ibuf;
 
-  ibuf = (unsigned char *)img->buffer;
-  iline = img->width * UNIQ_BPP;
-  ilen = img->width * img->height * UNIQ_BPP;
-  blen = img->width * img->height * pi->bpp + img->height;
+  ibuf = (unsigned char *)game->buffer;
+  iline = game->width * UNIQ_BPP;
+  ilen = game->width * game->height * UNIQ_BPP;
+  blen = game->width * game->height * pi->bpp + game->height;
   ipos = 0;
   bpos = 0;
   while (ipos < ilen && bpos < blen)
@@ -138,7 +138,7 @@ int	mipng_fill_img(mlx_img_list_t *img, unsigned char *buf, png_info_t *pi)
       if (pi->depth == 16)
 	bpos ++;
       if (ipos % 4 == 3 && pi->color == 2)  // no alpha
-	img->buffer[ipos++] = 0xFF;
+	game->buffer[ipos++] = 0xFF;
     }
   if (ipos != ilen || bpos != blen)
     {
@@ -170,7 +170,7 @@ int	mipng_data(mlx_img_list_t *img, unsigned char *dat, png_info_t *pi)
   unsigned char z_out[Z_CHUNK];
 
   b_pos = 0;
-  if (!(buffer = malloc((long long)img->width*(long long)img->height*(long long)pi->bpp + img->height)))
+  if (!(buffer = malloc((long long)game->width*(long long)game->height*(long long)pi->bpp + game->height)))
     err(1, "Can't malloc");
   z_strm.zalloc = Z_NULL;
   z_strm.zfree = Z_NULL;
@@ -199,7 +199,7 @@ int	mipng_data(mlx_img_list_t *img, unsigned char *dat, png_info_t *pi)
 	      inflateEnd(&z_strm);
 	      return (ERR_ZLIB);
 	    }
-	  if (b_pos + Z_CHUNK - z_strm.avail_out > img->width*img->height*pi->bpp+img->height)
+	  if (b_pos + Z_CHUNK - z_strm.avail_out > game->width*game->height*pi->bpp+game->height)
 	    {
 	      inflateEnd(&z_strm);
 	      return (ERR_DATA_MISMATCH);
@@ -210,9 +210,9 @@ int	mipng_data(mlx_img_list_t *img, unsigned char *dat, png_info_t *pi)
       dat += len + 4 + 4 + 4;
     } 
   inflateEnd(&z_strm);
-  if (b_pos != img->width*img->height*pi->bpp+img->height)
+  if (b_pos != game->width*game->height*pi->bpp+game->height)
     {
-      //      printf("pb : bpos %d vs expected %d\n", b_pos, img->width*img->height*pi->bpp+img->height);
+      //      printf("pb : bpos %d vs expected %d\n", b_pos, game->width*game->height*pi->bpp+game->height);
       return (ERR_DATA_MISMATCH);
     }
   if ((ret = mipng_fill_img(img, buffer, pi)))
@@ -404,8 +404,8 @@ void	*mlx_png_file_to_image(mlx_ptr_t *xvar, char *file, int *width, int *height
     }
   if ((img = mlx_int_parse_png(xvar, ptr, size)))
     {
-      *width = img->width;
-      *height = img->height;
+      *width = game->width;
+      *height = game->height;
     }
   else
     {

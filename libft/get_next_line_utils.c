@@ -3,66 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/08 21:05:57 by mraspors          #+#    #+#             */
-/*   Updated: 2022/07/26 04:16:32 by mraspors         ###   ########.fr       */
+/*   Created: 2022/06/25 15:47:47 by alalmazr          #+#    #+#             */
+/*   Updated: 2023/02/16 13:54:26 by alalmazr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strlen_gnl(char *s)
-{
-	int	i;
+// size_t	ft_strlen(const char *input)
+// {
+// 	int	i;
 
-	if (s == NULL)
-		return (0);
+// 	i = 0;
+// 	if (!input)
+// 		return (0);
+// 	while (input[i] != '\0')
+// 		i++;
+// 	return (i);
+// }
+
+char	*ft_strchr_gnl(const char *s, int c)
+{
+	int		i;
+
 	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-int	ft_strchr_gnl(char *str, int *i, int *give_loc)
-{
-	while (*i < (ft_strlen_gnl(str)))
+	if (s == NULL)
+		return (NULL);
+	if (s[i] == (char)c)
+		return ((char *)&s[ft_strlen(s)]);
+	while (s[i])
 	{
-		if (str[*i] == '\n')
-		{
-			*give_loc = *i;
-			return (*i);
-		}
-		(*i)++;
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i++;
 	}
-	*give_loc = -1;
-	return (-1);
+	return (0);
 }
 
-char	*ft_strjoin_gnl(char *s1, char *s2)
+char	*ft_str_init(void)
 {
-	int		li[3];
 	char	*str;
 
-	if (s2 == NULL || s2[0] == '\0')
+	str = (char *)malloc(1 * sizeof(char));
+	str[0] = 0;
+	return (str);
+}
+
+char	*ft_strjoin_mod(char *s1, char *s2)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	if (!s1)
+		s1 = ft_str_init();
+	if (!s1 || !s2)
 		return (NULL);
-	li[0] = ft_strlen_gnl(s1);
-	li[1] = ft_strlen_gnl(s2);
-	li[2] = 0;
-	str = (char *)malloc(sizeof(char) * (li[0] + li[1] + 1));
+	i = 0;
+	j = 0;
+	str = (char *) malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
-		return (NULL);
-	while (li[2] < li[0] + li[1] + 1)
+		return (0);
+	while (s1[i])
 	{
-		if (li[2] < li[0])
-			str[li[2]] = s1[li[2]];
-		if (li[2] >= li[0])
-			str[li[2]] = s2[li[2] - li[0]];
-		li[2]++;
+		str[i] = s1[i];
+		i++;
 	}
-	str[li[0] + li[1]] = '\0';
-	if (s1 != NULL)
-		free(s1);
-	s1 = NULL;
+	while (s2[j])
+		str[i++] = s2[j++];
+	str[ft_strlen(s1) + ft_strlen(s2)] = 0;
+	free(s1);
 	return (str);
 }

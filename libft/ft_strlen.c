@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 10:40:16 by alalmazr          #+#    #+#             */
-/*   Updated: 2023/02/16 13:54:26 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/12/21 00:03:18 by mraspors          #+#    #+#             */
+/*   Updated: 2022/07/31 03:54:24 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,12 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t	count;
+	size_t	i;
 
-	count = 0;
-	if (s[0] == '\0')
-	{
-		return (0);
-	}
-	while (s[count] != '\0')
-	{
-		count++;
-	}
-	return (count);
+	i = 0;
+	if (s == NULL)
+		return (i);
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }
-
-/*int main ()
-{
-    printf("%zu",ft_strlen("lord"));
-    return(0);
-}
-*/

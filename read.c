@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 13:53:55 by alalmazr          #+#    #+#             */
-/*   Updated: 2023/02/16 13:54:04 by alalmazr         ###   ########.fr       */
+/*   Created: 2023/02/13 16:56:35 by mraspors          #+#    #+#             */
+/*   Updated: 2023/02/16 21:17:06 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ void	make_map(t_list *list, t_data *game)
 	char	**tmp4;
 	char	**tmp3;
 
-	tmp4 = lst_2_arr(list);
+	tmp4 = ft_lsttoarr(list);
 	tmp3 = ft_remove_new_line(tmp4);
-	print_arr(tmp3);
+	printarr(tmp3);
 	game->map = tmp3;
-	free_arr((void **)tmp4);
+	ft_freearray((void **)tmp4);
 	ft_lstclear(&list, free);
 }
 
@@ -83,9 +83,9 @@ void	read_map(char *str, t_data *game)
 	fd = open_file(str);
 	line = read_first_line(fd);
 	line = remove_empty_lines(line, fd);
-	meta_data = read_meta_data(fd, game, line);
+	meta_data = read_meta_data(fd, game);
 	x = ft_split(meta_data, '\n');
-	game->data = rotate_arr(x);
+	game->data = roted_array(x);
 	free(meta_data);
 	make_map(get_lines(fd, game), game);
 }

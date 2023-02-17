@@ -3,94 +3,110 @@
 /*                                                        :::      ::::::::   */
 /*   raycast2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 13:53:32 by alalmazr          #+#    #+#             */
-/*   Updated: 2023/02/16 13:53:35 by alalmazr         ###   ########.fr       */
+/*   Created: 2023/02/13 16:29:56 by mraspors          #+#    #+#             */
+/*   Updated: 2023/02/16 21:18:30 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cub3d.h"
 
-void	init_loc(t_loc *loc, int x, int mapx, int mapy)
+void	raycast_5_helper(t_data *img)
 {
-	loc->x = x;
-	loc->y = 0;
-	loc->map_x = mapx;
-	loc->map_y = mapy;
-	loc->camera_x = 0;
-	loc->raydir_x = 0;
-	loc->raydir_y = 0;
-	loc->sidedist_x = 0;
-	loc->sidedist_y = 0;
-	loc->deltadist_x = 0;
-	loc->deltadist_y = 0;
-	loc->perpwalldist = 0;
-	loc->lineheight = 0;
-	loc->step_x = 0;
-	loc->step_y = 0;
-	loc->hit = 0;
-	loc->side = 0;
-	loc->wall_x = 0;
-	loc->tex_x = 0;
-	loc->tex_y = 0;
-	loc->step = 0;
-	loc->texpos = 0;
-	loc->color = 0;
-}
-
-void	raycast_help(t_data *game, int x, int mapx, int mapy)
-{
-	t_loc	loc;
-
-	init_loc(&loc, x, mapx, mapy);
-	raycast_help1(game, &loc);
-	raycast_help2(game, &loc);
-	raycast_help3(game, &loc);
-	raycast_help4(game, &loc);
-	raycast_help5(game, &loc);
-	raycast_help6(game, &loc);
-}
-
-void	put_imgs(t_data *game)
-{
-	int	max_size;
-	int	with;
-	int	skip;
-	int	size;
-
-	max_size = f_lline(game);
-	with = arr_2d_len((void **)game->map);
-	skip = first_space(game->map);
-	size = 500 / (max_size - skip + with);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	mlx_put_image_to_window(game->mlx, game->win, game->img_alpha, 0, 0);
-	ft_bzero(game->minimap_addr, with * size
-		* ((max_size - skip) * size) * (game->bpp_line / 8));
-	minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->gun1, 450, 510);
-	// draw_big_map(img);
-	// mlx_put_image_to_window(game->mlx, game->win, game->bag_map, 0, 0);
-
-}
-
-void	raycast(t_data *game)
-{
-	static long	frame;
-	int			x;
-	int			map_x;
-	int			map_y;
-
-	map_x = 0;
-	map_y = 0;
-	x = 0;
-	frame = 0;
-	while (x < SCREENWIDTH)
+	if (img->side == 0 && img->raydir_x > 0)
 	{
-		raycast_help(game, x, map_x, map_y);
-		x++;
+		if (img->hit == 1)
+			img->color = (int)img->texture[0][(int)TEXHEIGHT
+				* img->tex_y + img->tex_x];
 	}
-	put_imgs(game);
-	frame++;
+	else if (img->side == 0 && img->raydir_x < 0)
+	{
+		if (img->hit == 1)
+			img->color = (int)img->texture[1][(int)TEXHEIGHT
+				* img->tex_y + img->tex_x];
+	}
+	else if (img->side == 1 && img->raydir_y > 0)
+	{
+		if (img->hit == 1)
+			img->color = (int)img->texture[2][(int)TEXHEIGHT
+				* img->tex_y + img->tex_x];
+	}
+	else if (img->side == 1 && img->raydir_y < 0)
+	{
+		if (img->hit == 1)
+			img->color = (int)img->texture[3][(int)TEXHEIGHT
+				* img->tex_y + img->tex_x];
+	}
+}
+
+void	raycast_5(t_data *img)
+{
+	img->y = 0;
+	while (img->y < SCREENHEIGHT)
+	{
+		if (img->y >= img->draw_start && img->y <= img->draw_end)
+		{
+			img->tex_y = (int)img->tex_pos & (img->height[0] - 1);
+			img->tex_pos += img->step;
+			raycast_5_helper(img);
+			if (img->side == 1)
+				img->color = (img->color >> 1) & 8355711;
+			img->buffer[img->y][img->x] = img->color;
+		}
+		img->y++;
+	}
+}
+
+void	raycast_6(t_data *img)
+{
+	img->i = 0;
+	while (img->i < SCREENHEIGHT)
+	{
+		if (img->i < SCREENHEIGHT / 2)
+		{
+			my_mlx_pixel_put1(img, img->x, img->i, make_color(0, img->c_color.r,
+					img->c_color.g, img->c_color.b));
+		}
+		else if (img->i > SCREENHEIGHT / 2)
+			my_mlx_pixel_put1(img, img->x, img->i, make_color(0, img->f_color.r,
+					img->f_color.g, img->f_color.b));
+		img->i++;
+	}
+}
+
+void	raycast_7(t_data *img)
+{
+	img->i = 0;
+	while (img->i < SCREENHEIGHT)
+	{
+		if (img->i >= img->draw_start && img->i <= img->draw_end)
+		{
+			if (get_t(img->buffer[img->i][img->x]) > 0)
+			{
+				my_mlx_pixel_put1(img, img->x, img->i,
+					img->buffer[img->i][img->x]);
+			}
+			else
+				my_mlx_pixel_put1(img, img->x, img->i,
+					img->buffer[img->i][img->x]);
+		}
+		img->i++;
+	}
+}
+
+void	raycast_8(t_data *img)
+{
+	img->max_size = max_line_len(img);
+	img->with = arr_2d_len((void **)img->map);
+	img->skip = first_space(img->map);
+	img->size = 500 / (img->max_size + img->with);
+	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
+	ft_bzero(img->minimap_addr, img->with * img->size
+		* (img->max_size * img->size - img->skip) * (img->bpp_line / 8));
+	minimap_player(img, img->posx * img->size,
+		img->posy * img->size, 0x00FF0000);
+	minimap(img);
+	mlx_put_image_to_window(img->mlx, img->win, img->gun1, 450, 510);
+	img->frame++;
 }

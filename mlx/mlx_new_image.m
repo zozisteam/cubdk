@@ -20,16 +20,16 @@ void    *mlx_new_image(mlx_ptr_t *mlx_ptr, int width, int height)
   //    return (NULL);  // need at leat one window created to have openGL context and create texture
   if ((newimg = malloc(sizeof(*newimg))) == NULL)
     return ((void *)0);
-  newgame->next = mlx_ptr->img_list;
+  newimg->next = mlx_ptr->img_list;
   mlx_ptr->img_list = newimg;
-  newgame->width = width;
-  newgame->height = height;
-  newgame->vertexes[0] = 0.0;  newgame->vertexes[1] = 0.0;
-  newgame->vertexes[2] = width;  newgame->vertexes[3] = 0.0;
-  newgame->vertexes[4] = width;  newgame->vertexes[5] = -height;
-  newgame->vertexes[6] = 0.0;  newgame->vertexes[7] = -height;
-  newgame->buffer = malloc(UNIQ_BPP*width*height);
-  bzero(newgame->buffer, UNIQ_BPP*width*height);
+  newimg->width = width;
+  newimg->height = height;
+  newimg->vertexes[0] = 0.0;  newimg->vertexes[1] = 0.0;
+  newimg->vertexes[2] = width;  newimg->vertexes[3] = 0.0;
+  newimg->vertexes[4] = width;  newimg->vertexes[5] = -height;
+  newimg->vertexes[6] = 0.0;  newimg->vertexes[7] = -height;
+  newimg->buffer = malloc(UNIQ_BPP*width*height);
+  bzero(newimg->buffer, UNIQ_BPP*width*height);
 
   return (newimg);
 }
@@ -60,14 +60,14 @@ mlx_img_ctx_t	*add_img_to_ctx(mlx_img_list_t *img, mlx_win_list_t *win)
   glTexImage2D(
 	       GL_TEXTURE_2D, 0,           /* target, level of detail */
 	       GL_RGBA8,                    /* internal format */
-	       game->width, game->height, 0,           /* width, height, border */
+	       img->width, img->height, 0,           /* width, height, border */
 	       GL_BGRA, GL_UNSIGNED_BYTE,   /* external format, type */
-	       game->buffer               /* pixels */
+	       img->buffer               /* pixels */
 	       );
 
   glGenBuffers(1, &(imgctx->vbuffer));
   glBindBuffer(GL_ARRAY_BUFFER, imgctx->vbuffer);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(game->vertexes), game->vertexes, GL_DYNAMIC_DRAW); // 4 points buff
+  glBufferData(GL_ARRAY_BUFFER, sizeof(img->vertexes), img->vertexes, GL_DYNAMIC_DRAW); // 4 points buff
 
   return (imgctx);
 }
@@ -158,11 +158,11 @@ int     mlx_destroy_image(mlx_ptr_t *mlx_ptr, mlx_img_list_t *img_todel)
 
   img_first.next = mlx_ptr->img_list;
   img = &img_first;
-  while (img && game->next)
+  while (img && img->next)
     {
-      if (game->next == img_todel)
-	game->next = game->next->next;
-      img = game->next;
+      if (img->next == img_todel)
+	img->next = img->next->next;
+      img = img->next;
     }
   mlx_ptr->img_list = img_first.next;
 

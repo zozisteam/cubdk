@@ -3,40 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 14:21:24 by alalmazr          #+#    #+#             */
-/*   Updated: 2023/02/16 13:54:26 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/12/22 20:23:35 by mraspors          #+#    #+#             */
+/*   Updated: 2022/10/28 04:12:16 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char
-	*ft_substr(char const *s, unsigned int start, size_t len)
+size_t	ft_mem_l(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
-	size_t	j;
-	char	*str;
+
+	if (len > ft_strlen(s))
+		i = ft_strlen(s) - start;
+	else
+		i = len + 1;
+	return (i);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char		*str;
+	size_t		i;
 
 	if (!s)
 		return (NULL);
-	if (ft_strlen(s) < len)
-		len = ft_strlen(s);
-	str = (char *)malloc(sizeof(*s) * (len + 1));
+	if (start > ft_strlen(s))
+	{
+		str = (char *)malloc(sizeof(char) * 1);
+		if (!str)
+			return (NULL);
+		str[0] = '\0';
+		return (str);
+	}
+	str = (char *)malloc(sizeof(char) * ft_mem_l(s, start, len));
 	if (!str)
 		return (NULL);
 	i = 0;
-	j = 0;
-	while (s[i])
+	while (i < len && s[start + i] != '\0')
 	{
-		if (i >= start && j < len)
-		{
-			str[j] = s[i];
-			j++;
-		}
+		str[i] = s[start + i];
 		i++;
 	}
-	str[j] = 0;
+	str[i] = '\0';
 	return (str);
 }

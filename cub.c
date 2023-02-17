@@ -3,58 +3,85 @@
 /*                                                        :::      ::::::::   */
 /*   cub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 13:31:44 by alalmazr          #+#    #+#             */
-/*   Updated: 2023/02/16 13:54:26 by alalmazr         ###   ########.fr       */
+/*   Created: 2023/02/13 16:58:00 by mraspors          #+#    #+#             */
+/*   Updated: 2023/02/13 16:58:01 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	raycast_help6(t_data *game, t_loc *loc)
+void	check_name(char *str)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (i < SCREENHEIGHT)
+	while (*str)
 	{
-		if (i < SCREENHEIGHT / 2)
-			my_mlx_pixel_put1(game, loc->x, i,
-				make_color(0, game->c_color.r, game->c_color.g, game->c_color.b));
-		else if (i > SCREENHEIGHT / 2)
-			my_mlx_pixel_put1(game, loc->x, i,
-				make_color(0, game->f_color.r, game->f_color.g, game->f_color.b));
-		i++;
-	}
-	i = -1;
-	while (++i < SCREENHEIGHT)
-	{
-		my_mlx_pixel_put_alpha(game, loc->x, i, 0xff000000);
-		if (i >= game->drawstart && i <= game->drawend)
+		if (*str == '.')
 		{
-			if (get_t(game->buffer[i][loc->x]) > 0)
-				my_mlx_pixel_put_alpha(game, loc->x, i, game->buffer[i][loc->x]);
+			if (strcmp(str + 1, "cub"))
+			{
+				exit(EXIT_FAILURE);
+			}
 			else
-				my_mlx_pixel_put1(game, loc->x, i, game->buffer[i][loc->x]);
+				break ;
 		}
+		str++;
 	}
 }
 
-void	raycast_framing_help(t_data *game, t_loc *loc, int t)
+int	open_file(char *str)
 {
-	if (get_t(t) == 0)
-		loc->color = t;
-	else
-		loc->color = (int)(int)game->texture[0][(int)TEXHEIGHT
-			*loc->tex_y + loc->tex_x] & 0xffffff;
+	int	fd;
+
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
+		ft_error();
+	return (fd);
 }
 
-
-void	raycast_f(t_data *game, t_loc *loc, int i)
+char	*read_meta_data(int fd, t_data *data)
 {
-	if (loc->hit == 1)
-		loc->color = (int)game->texture[i]
-		[(int)TEXHEIGHT * loc->tex_y + loc->tex_x] & 0xffffff;
+	int		z;
+
+	data->read_data_line = NULL;
+	data->read_data_tmp = NULL;
+	z = 0;
+	while (!z)
+	{
+		data->read_data_line = get_next_line(fd);
+		if (!data->read_data_line || start_one(data->read_data_line))
+		{
+			z = 1;
+			break ;
+		}
+		if (ft_strlen(data->read_data_line) == 0)
+		{
+			free(data->read_data_line);
+			continue ;
+		}
+		data->read_data_line = ft_strtrim(data->read_data_line, " \t");
+		data->read_data_tmp = ft_strjoin_gnl(data->read_data_tmp,
+				data->read_data_line);
+		free(data->read_data_line);
+	}
+	data->first_line = data->read_data_line;
+	return (data->read_data_tmp);
 }
 
+void	raycast(t_data *img)
+{
+	img->x = 0;
+	while (img->x < SCREENWIDTH)
+	{
+		raycast_init(img);
+		raycast_1(img);
+		raycast_2(img);
+		raycast_3(img);
+		raycast_4(img);
+		raycast_5(img);
+		raycast_6(img);
+		raycast_7(img);
+		img->x++;
+	}
+	raycast_8(img);
+}

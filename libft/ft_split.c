@@ -3,96 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 15:33:50 by alalmazr          #+#    #+#             */
-/*   Updated: 2023/02/16 13:54:26 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/12/31 12:40:29 by mraspors          #+#    #+#             */
+/*   Updated: 2021/12/31 12:40:29 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-static	void	ft_undoalloc(char *s, int i)
-{
-	while (i >= 0)
-	{
-		free(&s[i]);
-		i--;
-	}
-	free (s);
-}
-
-static	int	ft_worddet(char const *s, char c)
+int	ft_count(char const *s, char c)
 {
 	int	i;
-	int	count;
+	int	counter;
 
 	i = 0;
-	count = 0;
-	while (s[i])
+	counter = 0;
+	while (s[i] != '\0')
 	{
-		while (s[i] == c)
+		if (s[i] == c)
 			i++;
-		if (s[i] && (s[i] != c))
-			count++;
-		while (s[i] && s[i] != c)
-			i++;
+		else
+		{
+			counter++;
+			while (s[i] != c && s[i] != '\0')
+				i++;
+		}
 	}
-	return (count);
+	return (counter);
 }
 
-static	char	*ft_cpystr(char const *s, char c)
+char	*ft_add_word(char const *s, int start, int end)
 {
-	size_t	i;
-	char	*str;
+	int		i;
+	char	*word;
 
+	word = malloc((end - start + 1) * sizeof(char));
+	if (!word)
+		return (NULL);
 	i = 0;
-	while (s[i] && s[i] != c)
+	while (i < end - start)
 	{
+		word[i] = s[start + i];
 		i++;
 	}
-	str = (char *)ft_calloc((i + 1), sizeof(char));
-	if (!str)
-		return (0);
-	ft_memcpy(str, s, i);
-	return (str);
+	word[i] = '\0';
+	return (word);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		i;
-	int		count;
-	char	**split;
+	int		var[3];
+	char	**result;
 
 	if (!s)
-		return (0);
-	count = ft_worddet(s, c);
-	split = (((char **) malloc (sizeof(char *) * (count + 1))));
-	if (!split)
-		return (0);
-	i = 0;
-	while (i < count)
+		return (NULL);
+	result = malloc((ft_count(s, c) + 1) * sizeof(char *));
+	if (!result)
+		return (NULL);
+	var[0] = 0;
+	var[1] = 0;
+	var[2] = 0;
+	while (s[var[0]] != '\0')
 	{
-		while (*s == c)
-			s++;
-		split[i] = ft_cpystr(s, c);
-		if (!split[i])
-			ft_undoalloc(*split, i);
-		s += ft_strlen(split[i]);
-		i++;
+		if (s[var[0]] != c)
+		{
+			var[2] = var[0];
+			while (s[var[0]] != c && s[var[0]] != '\0')
+				var[0]++;
+			result[var[1]++] = ft_add_word(s, var[2], var[0]);
+		}
+		else
+			var[0]++;
 	}
-	split[i] = 0;
-	return (split);
+	result[var[1]] = NULL;
+	return (result);
 }
-
-// int main()
-// {
-// 	int i = 0;
-// 	char a[] = "   My  Name  Is abood 19.3 years ";
-// 	char	**split = ft_split(a, ' ');
-// 	while (split[i])
-// 	{
-// 		printf("%s \n", split[i]);
-// 		i++;
-// 	}
-// }

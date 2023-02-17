@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alalmazr <alalmazr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 16:34:11 by alalmazr          #+#    #+#             */
-/*   Updated: 2023/02/16 13:54:26 by alalmazr         ###   ########.fr       */
+/*   Created: 2021/12/21 08:10:46 by mraspors          #+#    #+#             */
+/*   Updated: 2021/12/21 08:10:49 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)
@@ -19,18 +18,9 @@ char	*ft_strrchr(const char *s, int c)
 	i = ft_strlen(s);
 	while (i >= 0)
 	{
-		if ((char)c == s[i])
-		{
+		if (s[i] == (char)c)
 			return ((char *)&s[i]);
-		}
 		i--;
 	}
-	return (0);
+	return (NULL);
 }
-
-// int main ()
-// {
-// 	char s[] = "hi my frinde";
-// 	char i = 'i';
-// 	printf("%s", ft_strrchr(s,i));
-// }
